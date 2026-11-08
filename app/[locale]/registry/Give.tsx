@@ -1,15 +1,13 @@
 import { getTranslations } from "next-intl/server";
 import { registry } from "@/lib/registry";
-import { CopyButton } from "./CopyButton";
 
 const button =
   "flex flex-col items-center rounded-2xl bg-primary px-6 py-3 text-center font-medium text-paper ring-1 ring-gold/40 hover:bg-primary-dark";
 
-// Venmo and PayPal open their apps straight to our profile.
-// Zelle has no public profile links, so guests copy our email/phone instead.
+// Venmo and PayPal links open the app (or website) straight to our profile.
 export async function Give() {
   const t = await getTranslations("Registry.give");
-  const { venmo, paypal, zelle } = registry.giving;
+  const { venmo, paypal } = registry.giving;
   const soon = <span className="text-xs text-muted">{t("soon")}</span>;
 
   return (
@@ -17,7 +15,7 @@ export async function Give() {
       <h2 className="font-serif text-4xl">{t("title")}</h2>
       <p className="mx-auto mt-3 mb-6 max-w-prose text-muted">{t("intro")}</p>
 
-      <div className="grid gap-3 sm:grid-cols-3">
+      <div className="mx-auto grid max-w-xl gap-3 sm:grid-cols-2">
         {venmo ? (
           <a href={`https://venmo.com/u/${venmo}`} target="_blank" rel="noopener noreferrer" className={button}>
             Venmo
@@ -34,17 +32,6 @@ export async function Give() {
           </a>
         ) : (
           <div className="glass flex flex-col rounded-2xl px-6 py-3 font-medium">PayPal {soon}</div>
-        )}
-
-        {zelle ? (
-          <CopyButton
-            text={zelle}
-            label="Zelle"
-            copiedLabel={t("copied")}
-            className={button}
-          />
-        ) : (
-          <div className="glass flex flex-col rounded-2xl px-6 py-3 font-medium">Zelle {soon}</div>
         )}
       </div>
 

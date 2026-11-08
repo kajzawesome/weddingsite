@@ -16,13 +16,8 @@
     "photoAlt": "{first} and {second}",
     "daysToGo": "{count, plural, one {# day to go} other {# days to go}}",
     "today": "Today's the day!",
-    "nav": {
-      "story": "Our story",
-      "schedule": "The day",
-      "reception": "Reception",
-      "faq": "Questions",
-      "rsvp": "RSVP"
-    }
+    "rsvp": "RSVP",
+    "skip": "Skip"
   },
   "Story": {
     "title": "Our story",
@@ -155,22 +150,81 @@
       "title": "Ways to give",
       "intro": "Send a gift with any of these, and add a note saying which fund it's for (like “Honeymoon”).",
       "soon": "Coming soon",
-      "copied": "Copied!",
       "boxTitle": "Card box at the reception",
       "boxBody": "Prefer cash or a card? We'll have a card box at the reception."
-    }
+    },
+    "otherTitle": "Have something else in mind?",
+    "otherBody": "These are just ideas. If you see something you think we'd love, we'd be thrilled with anything chosen with you in mind."
   },
   "Gallery": {
-    "title": "Photo gallery",
-    "soon": "The gallery opens when the wedding starts. Come back on the day to see everyone's photos.",
-    "share": "Upload photos"
+    "title": "Our photos",
+    "intro": "A few favourites from our engagement in Bahia, selfies and all. On the wedding day this page becomes a shared album, and we want it ALL: every photo and video, blurry, candid or silly.",
+    "engagementTitle": "Engagement",
+    "dayTitle": "On the wedding day",
+    "steps": {
+      "scan": {
+        "title": "Scan the QR code",
+        "body": "You'll find one on every table."
+      },
+      "name": {
+        "title": "Add your name",
+        "body": "Just once, so we know who captured each moment."
+      },
+      "share": {
+        "title": "Share photos and videos",
+        "body": "They upload even on weak signal and finish on their own when you're back online."
+      }
+    },
+    "opens": "The shared album opens here when the wedding begins.",
+    "ideasTitle": "Photo ideas",
+    "ideas": {
+      "grandparents": "A photo with the grandparents",
+      "danceFloor": "The dance floor from above",
+      "tableSelfie": "Your table's best selfie",
+      "firstDance": "Our first dance",
+      "laugh": "Someone mid-laugh",
+      "details": "The little details: flowers, rings, cake"
+    },
+    "share": "Go to photo upload"
   },
   "Share": {
     "title": "Share your photos",
-    "soon": "On the wedding day, scan the QR code at your table to upload photos and videos straight from your phone.",
-    "gallery": "See the gallery"
+    "intro": "Add your photos and videos from today. They go straight into our shared album, and we want them all!",
+    "codeTitle": "Enter the event code",
+    "codeHint": "It's printed on the card on your table, under the QR code.",
+    "wrongCode": "That code didn't work. Please check the card on your table.",
+    "nameTitle": "What's your name?",
+    "nameHint": "So we know who captured each moment. We'll remember it on this phone.",
+    "continue": "Continue",
+    "hello": "Hi {name}!",
+    "notYou": "Not you?",
+    "pick": "Choose photos and videos",
+    "pickHint": "Pick as many as you like. Videos up to 60 seconds.",
+    "keepOpen": "Keep this page open while they upload. If you lose signal, they'll finish on their own when you're back online.",
+    "offline": "You're offline. Your photos are saved on your phone and will upload when the signal comes back.",
+    "progress": "{done} of {total} uploaded",
+    "allDone": "All uploaded. Thank you!",
+    "video": "Video",
+    "notReady": "Photo uploads aren't open yet. Please check back on the wedding day!",
+    "status": {
+      "waiting": "Waiting",
+      "uploading": "Uploading {percent}%",
+      "retrying": "Weak signal, retrying…",
+      "done": "Uploaded"
+    },
+    "errors": {
+      "tooLong": "Over 60 seconds",
+      "tooBig": "Too large (max 100 MB)",
+      "failed": "Couldn't upload"
+    },
+    "galleryLink": "See the photos page"
   },
   "Footer": {
     "madeWith": "Made with love by {first} & {second}"
+  },
+  "LanguageSuggest": {
+    "text": "This site is also available in English.",
+    "switch": "Switch to English",
+    "dismiss": "No thanks"
   }
 }

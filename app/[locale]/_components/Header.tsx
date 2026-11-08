@@ -8,8 +8,9 @@ export async function Header() {
   const { first, second } = event.couple;
 
   return (
-    <header className="sticky top-0 z-20 px-3 pt-3">
-      <div className="glass mx-auto flex max-w-3xl items-center justify-between gap-3 rounded-full py-2 pr-2 pl-5">
+    // h-0: the bar floats over the page (and the full-screen photo) without taking up space.
+    <header className="sticky top-0 z-30 h-0 px-3">
+      <div className="glass mx-auto mt-3 flex max-w-5xl items-center justify-between gap-3 rounded-full py-2 pr-2 pl-5">
         <Link href="/" className="shrink-0 font-serif text-lg sm:text-xl">
           {first} <span className="font-script text-gold">&amp;</span> {second}
         </Link>

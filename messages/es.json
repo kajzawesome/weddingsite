@@ -16,13 +16,8 @@
     "photoAlt": "{first} y {second}",
     "daysToGo": "{count, plural, one {Falta # día} other {Faltan # días}}",
     "today": "¡Hoy es el gran día!",
-    "nav": {
-      "story": "Nuestra historia",
-      "schedule": "El gran día",
-      "reception": "Recepción",
-      "faq": "Preguntas",
-      "rsvp": "Confirmar asistencia"
-    }
+    "rsvp": "Confirmar asistencia",
+    "skip": "Saltar"
   },
   "Story": {
     "title": "Nuestra historia",
@@ -155,22 +150,81 @@
       "title": "Cómo hacer un regalo",
       "intro": "Envía un regalo con cualquiera de estas opciones y añade una nota indicando para qué fondo es (por ejemplo, “Luna de miel”).",
       "soon": "Próximamente",
-      "copied": "¡Copiado!",
       "boxTitle": "Caja de tarjetas en la recepción",
       "boxBody": "¿Prefieres dar efectivo o una tarjeta? Tendremos una caja de tarjetas en la recepción."
-    }
+    },
+    "otherTitle": "¿Tienes otra idea?",
+    "otherBody": "Estas son solo ideas. Si ves algo que crees que nos encantaría, estaremos felices con cualquier regalo elegido con cariño."
   },
   "Gallery": {
-    "title": "Galería de fotos",
-    "soon": "La galería se abre cuando empiece la boda. Vuelve ese día para ver las fotos de todos.",
-    "share": "Subir fotos"
+    "title": "Nuestras fotos",
+    "intro": "Algunas favoritas de nuestro compromiso en Bahía, con selfies y todo. El día de la boda esta página se convierte en un álbum compartido, y lo queremos TODO: cada foto y video, borroso, espontáneo o divertido.",
+    "engagementTitle": "Compromiso",
+    "dayTitle": "El día de la boda",
+    "steps": {
+      "scan": {
+        "title": "Escanea el código QR",
+        "body": "Encontrarás uno en cada mesa."
+      },
+      "name": {
+        "title": "Escribe tu nombre",
+        "body": "Solo una vez, para saber quién capturó cada momento."
+      },
+      "share": {
+        "title": "Comparte fotos y videos",
+        "body": "Se suben incluso con poca señal y terminan solas cuando vuelve la conexión."
+      }
+    },
+    "opens": "El álbum compartido se abre aquí cuando empiece la boda.",
+    "ideasTitle": "Ideas de fotos",
+    "ideas": {
+      "grandparents": "Una foto con los abuelos",
+      "danceFloor": "La pista de baile desde arriba",
+      "tableSelfie": "La mejor selfie de tu mesa",
+      "firstDance": "Nuestro primer baile",
+      "laugh": "Alguien a mitad de una carcajada",
+      "details": "Los detalles: flores, anillos, pastel"
+    },
+    "share": "Ir a subir fotos"
   },
   "Share": {
     "title": "Comparte tus fotos",
-    "soon": "El día de la boda, escanea el código QR de tu mesa para subir fotos y videos directo desde tu teléfono.",
-    "gallery": "Ver la galería"
+    "intro": "Añade tus fotos y videos de hoy. Van directo a nuestro álbum compartido, ¡y los queremos todos!",
+    "codeTitle": "Escribe el código del evento",
+    "codeHint": "Está en la tarjeta de tu mesa, debajo del código QR.",
+    "wrongCode": "Ese código no funcionó. Revisa la tarjeta de tu mesa.",
+    "nameTitle": "¿Cómo te llamas?",
+    "nameHint": "Para saber quién capturó cada momento. Lo recordaremos en este teléfono.",
+    "continue": "Continuar",
+    "hello": "¡Hola, {name}!",
+    "notYou": "¿No eres tú?",
+    "pick": "Elegir fotos y videos",
+    "pickHint": "Elige todas las que quieras. Videos de hasta 60 segundos.",
+    "keepOpen": "Deja esta página abierta mientras se suben. Si pierdes la señal, terminarán solas cuando vuelva la conexión.",
+    "offline": "Estás sin conexión. Tus fotos están guardadas en el teléfono y se subirán cuando vuelva la señal.",
+    "progress": "{done} de {total} subidas",
+    "allDone": "Todo subido. ¡Gracias!",
+    "video": "Video",
+    "notReady": "La subida de fotos aún no está abierta. ¡Vuelve el día de la boda!",
+    "status": {
+      "waiting": "En espera",
+      "uploading": "Subiendo {percent}%",
+      "retrying": "Señal débil, reintentando…",
+      "done": "Subida"
+    },
+    "errors": {
+      "tooLong": "Más de 60 segundos",
+      "tooBig": "Demasiado grande (máx. 100 MB)",
+      "failed": "No se pudo subir"
+    },
+    "galleryLink": "Ver la página de fotos"
   },
   "Footer": {
     "madeWith": "Hecho con amor por {first} y {second}"
+  },
+  "LanguageSuggest": {
+    "text": "Este sitio también está en español.",
+    "switch": "Cambiar a español",
+    "dismiss": "No, gracias"
   }
 }

@@ -1,13 +1,16 @@
 import { getTranslations } from "next-intl/server";
 import { event } from "@/config/event";
-import { Flourish } from "./Flourish";
+import { Meadow } from "./Decor";
 
 export async function Footer() {
   const t = await getTranslations("Footer");
   return (
-    <footer className="border-t border-line py-8 text-center text-sm text-muted">
-      <Flourish className="mb-3" />
-      {t("madeWith", event.couple)}
+    // relative z-10 keeps the footer above the pinned photos as the page ends
+    <footer className="sheet relative z-10 text-center text-sm text-muted">
+      <Meadow />
+      <p className="bg-cream pt-2 pb-8 font-serif text-lg">
+        {t("madeWith", event.couple)}
+      </p>
     </footer>
   );
 }

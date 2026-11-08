@@ -14,7 +14,7 @@ export async function Schedule() {
     <Section id="schedule" title={t("title")}>
       <div className="grid gap-4 sm:grid-cols-3">
         {parts.map(({ label, note, venue }) => (
-          <div key={label} className="glass rounded-3xl p-6 text-center">
+          <div key={label} className="glass reveal rounded-3xl p-6 text-center">
             <h3 className="font-serif text-2xl">{label}</h3>
             {note && <p className="mt-1 text-sm text-muted">{note}</p>}
             <p className="mt-2 text-gold">{venue.time ?? t("timeSoon")}</p>

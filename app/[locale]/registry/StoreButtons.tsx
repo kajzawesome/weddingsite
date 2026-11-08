@@ -8,7 +8,7 @@ export async function StoreButtons() {
   const locale = await getLocale();
 
   return (
-    <div className="grid gap-3 sm:grid-cols-3">
+    <div className="mx-auto grid max-w-xl gap-3 sm:grid-cols-2">
       {registry.stores.map((store) => {
         const name = localize(store.name, locale);
         return store.url ? (

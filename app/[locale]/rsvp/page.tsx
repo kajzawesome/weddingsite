@@ -15,7 +15,7 @@ export default async function RsvpPage() {
   const format = await getFormatter();
 
   return (
-    <div className="mx-auto max-w-lg px-4 py-14">
+    <div className="mx-auto max-w-lg px-4 pt-28 pb-14">
       <div className="text-center">
         <h1 className="font-serif text-5xl">{t("title")}</h1>
         <Flourish className="my-5" />

@@ -8,6 +8,10 @@ import { routing } from "@/i18n/routing";
 import { sans, script, serif } from "@/lib/fonts";
 import { Footer } from "./_components/Footer";
 import { Header } from "./_components/Header";
+import { LanguageSuggest } from "./_components/LanguageSuggest";
+
+// Must match INTRO_KEY in _home/EnvelopeIntro.tsx (a client file, so not imported here).
+const INTRO_KEY = "envelope-seen";
 import "../globals.css";
 
 // Pre-build /en, /pt and /es at deploy time.
@@ -35,13 +39,24 @@ export default async function LocaleLayout({
     <html
       lang={htmlLang[locale]}
       className={`${serif.variable} ${sans.variable} ${script.variable} antialiased`}
+      // The script below may add a class before React loads; that's expected.
+      suppressHydrationWarning
     >
+      <head>
+        {/* Runs before the page paints: hide the opening envelope if it already played this visit. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(sessionStorage.getItem("${INTRO_KEY}"))document.documentElement.classList.add("intro-seen")}catch(e){}`,
+          }}
+        />
+      </head>
       <body className="flex min-h-dvh flex-col">
         <div aria-hidden className="page-glow" />
         <NextIntlClientProvider>
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />
+          <LanguageSuggest />
         </NextIntlClientProvider>
       </body>
     </html>

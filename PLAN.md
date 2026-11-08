@@ -41,16 +41,17 @@ Decision (2026-11-08): RSVPs go to a Google Sheet instead of Supabase, so KAJ an
 - [ ] Later (optional): guest list import + personal links `/i/[slug]` pre-filling the form; registry editing without code
 Done when: a real RSVP from a phone shows in the sheet and the guest gets the email.
 
-## Phase 3 — Photo upload + QR (1–2 weekends)
-Learn: signed uploads, browser file APIs, retry queues, image resizing.
-- [ ] Cloudinary upload preset (folder `wedding/`), signed uploads only
-- [ ] API route `/api/upload-signature` returns a short-lived signature (checks the event code)
-- [ ] `/share` page: enter first name once (saved in localStorage), pick or take photos/videos, resize photos to ~2500px in the browser, cap videos at 60 s / 200 MB
-- [ ] Upload queue: progress per file, auto-retry on bad signal, "keep this page open" note
-- [ ] `photos` table: (id, cloudinary_public_id, type, uploader_name, status `visible|hidden`, created_at)
-- [ ] Rate limit: max uploads per minute per device
-- [ ] Generate the QR (`qrcode` package) as SVG + PNG for Canva and table cards; also print the short URL under it
-Done when: you upload 20 photos from your phone on slow 3G (Chrome dev tools) and all arrive.
+## Phase 3 — Photo upload + QR (built 2026-11-08, needs Cloudinary account)
+Decision: Cloudinary only (no Supabase); photos are tagged/foldered there and listed from it in Phase 4.
+- [x] `/api/upload-signature`: checks the event code (`SHARE_CODE`), rate-limits, returns a signed upload (folder `wedding`, tag `wedding`, uploader name in context)
+- [x] `/share`: code from the QR link (remembered), name asked once, pick many photos/videos
+- [x] Photos resized to 2500px in the browser (also strips GPS); videos capped at 60 s / 100 MB (Cloudinary free limit)
+- [x] Queue saved in IndexedDB: survives bad signal, offline, locked screen and closing the page; retries with backoff; videos upload in 6 MB pieces and resume mid-file
+- [x] Keeps the screen awake while uploading; warns before leaving mid-upload
+- [x] QR generator: `node scripts/make-qr.mts <site-url> <code>` → `print/share-qr.svg/png`
+- [x] Tested with a flaky fake Cloudinary: dropped requests retried, signatures valid, resumed after closing the page
+- [ ] KAJ: create Cloudinary account, add the 4 env keys (`.env.example`), test from a real phone
+- [ ] Print QR cards only after the domain is final
 
 ## Phase 4 — Gallery (1 weekend)
 Learn: auth with cookies, image optimisation, zip downloads.

@@ -51,7 +51,7 @@ export async function Faq() {
   return (
     <Section id="faq" title={t("title")}>
       {/* <details> gives an accordion with no JavaScript */}
-      <div className="glass divide-y divide-white/70 rounded-3xl">
+      <div className="glass reveal mx-auto max-w-3xl divide-y divide-white/70 rounded-3xl">
         {items.map(({ q, a }) => (
           <details key={q} className="group px-5 py-4">
             <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-medium">

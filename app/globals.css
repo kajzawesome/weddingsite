@@ -71,3 +71,187 @@ body {
   color: var(--color-ink);
   font-family: var(--font-sans);
 }
+
+/*
+  The "sheet": the page content that slides up over the full-width photo.
+  Its background repeats the soft pink/blue/gold glow so it never looks flat.
+*/
+.sheet {
+  background:
+    radial-gradient(38rem 30rem at 0% 10%, rgb(246 223 226 / 0.8), transparent 65%),
+    radial-gradient(34rem 30rem at 100% 40%, rgb(220 230 242 / 0.8), transparent 65%),
+    radial-gradient(30rem 26rem at 15% 90%, rgb(235 220 190 / 0.5), transparent 65%),
+    var(--color-cream);
+  box-shadow: 0 -24px 48px -24px rgb(43 42 51 / 0.25);
+}
+
+/*
+  Scroll animations, done entirely in CSS ("scroll-driven animations"):
+  each .reveal element fades and rises as it enters the screen. Browsers that
+  don't support it, or guests who ask for reduced motion, just see it in place.
+*/
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(36px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
+  }
+}
+
+/* ---------- Photo film strip (Photos page) ---------- */
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee linear infinite;
+}
+
+.marquee-reverse {
+  animation-direction: reverse;
+}
+
+/* Pause while someone is looking (mouse over it, or a finger on it). */
+.marquee:hover .marquee-track,
+.marquee:active .marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+  }
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* ---------- Opening envelope (first visit) ---------- */
+
+/* If the envelope already played this visit, a tiny script adds this class before paint. */
+.intro-seen .envelope-intro {
+  display: none;
+}
+
+.envelope-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(40rem 30rem at 20% 10%, rgb(246 223 226 / 0.9), transparent 70%),
+    radial-gradient(36rem 30rem at 90% 80%, rgb(220 230 242 / 0.9), transparent 70%),
+    var(--color-cream);
+  transition: opacity 0.7s ease, visibility 0.7s;
+}
+
+.envelope-intro[data-stage="done"] {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.envelope {
+  position: relative;
+  width: min(82vw, 420px);
+  aspect-ratio: 3 / 2;
+  perspective: 1200px;
+}
+
+.envelope-back,
+.envelope-front,
+.envelope-flap {
+  position: absolute;
+  inset: 0;
+}
+
+.envelope-back {
+  border-radius: 6px;
+  background: #f1e1dc;
+  box-shadow: 0 30px 60px -30px rgb(43 42 51 / 0.45);
+}
+
+/* The pocket: left, right and bottom folds drawn with clip-path triangles. */
+.envelope-front {
+  z-index: 3;
+  background:
+    linear-gradient(to top right, #ead2cc 50%, transparent 50.5%) left / 50.5% 100% no-repeat,
+    linear-gradient(to top left, #ead2cc 50%, transparent 50.5%) right / 50.5% 100% no-repeat;
+  clip-path: polygon(0 0, 50% 55%, 100% 0, 100% 100%, 0 100%);
+  background-color: #f6e8e4;
+  border-radius: 0 0 6px 6px;
+}
+
+.envelope-flap {
+  z-index: 4;
+  height: 60%;
+  background: #ecd6d0;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top;
+  transition: transform 0.8s cubic-bezier(0.6, 0, 0.3, 1);
+}
+
+.envelope-intro[data-stage="open"] .envelope-flap,
+.envelope-intro[data-stage="letter"] .envelope-flap,
+.envelope-intro[data-stage="done"] .envelope-flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+.envelope-seal {
+  position: absolute;
+  z-index: 5;
+  left: 50%;
+  top: 60%;
+  width: 22%;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  border-radius: 9999px;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle at 35% 30%, #d9bb85, var(--color-gold) 60%, #9a7a45);
+  box-shadow: 0 4px 10px rgb(43 42 51 / 0.3), inset 0 0 0 3px rgb(255 255 255 / 0.25);
+  color: #fff8ec;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.envelope-intro:not([data-stage="closed"]) .envelope-seal {
+  opacity: 0;
+  transform: scale(0.6);
+}
+
+.envelope-letter {
+  position: absolute;
+  z-index: 2;
+  inset: 6% 6% 4%;
+  border-radius: 4px;
+  background: var(--color-paper);
+  box-shadow: 0 10px 30px -12px rgb(43 42 51 / 0.3);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  transition: transform 0.9s cubic-bezier(0.3, 0, 0.2, 1);
+}
+
+.envelope-intro[data-stage="letter"] .envelope-letter,
+.envelope-intro[data-stage="done"] .envelope-letter {
+  transform: translateY(-55%);
+}

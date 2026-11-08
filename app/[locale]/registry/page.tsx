@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
 import { localize } from "@/lib/localized";
 import { registry } from "@/lib/registry";
+import { Garland } from "../_components/Decor";
 import { Flourish } from "../_components/Flourish";
 import { Funds } from "./Funds";
 import { Give } from "./Give";
@@ -17,7 +18,8 @@ export default async function RegistryPage() {
   const locale = await getLocale();
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-14">
+    <div className="mx-auto max-w-5xl px-4 pt-24 pb-14">
+      <Garland className="mb-2" />
       <h1 className="text-center font-serif text-5xl">{t("title")}</h1>
       <Flourish className="mt-4" />
       <p className="mx-auto mt-4 max-w-prose text-center leading-relaxed text-muted">
@@ -30,30 +32,30 @@ export default async function RegistryPage() {
       <StoreButtons />
 
       <h2 className="mt-16 mb-6 text-center font-serif text-4xl">{t("ideasTitle")}</h2>
-      <div className="gap-4 sm:columns-2">
-        {/* CSS columns stack cards like a masonry wall, with no gaps under short cards */}
+      {/* One full-width card per category, so every card lines up on the same edges */}
+      <div className="space-y-4">
         {registry.categories.map((category) => (
-          <div key={category.id} className="glass mb-4 break-inside-avoid rounded-3xl p-6">
-            <h3 className="font-serif text-2xl">{localize(category.title, locale)}</h3>
-            <ul className="mt-3 space-y-2">
+          <div key={category.id} className="glass reveal rounded-3xl px-6 py-7 text-center">
+            <h3 className="font-serif text-3xl">{localize(category.title, locale)}</h3>
+            <div className="mx-auto my-3 h-px w-10 bg-gold/60" />
+            <ul className="grid gap-x-6 gap-y-2.5 sm:grid-cols-2 lg:grid-cols-3">
               {category.items.map((item) => (
-                <li key={localize(item.name, "en")} className="flex gap-2">
-                  <span className="text-gold" aria-hidden>
-                    ·
-                  </span>
-                  <span>
-                    {localize(item.name, locale)}
-                    {item.note && (
-                      <span className="block text-sm text-muted">
-                        {localize(item.note, locale)}
-                      </span>
-                    )}
-                  </span>
+                <li key={localize(item.name, "en")}>
+                  {localize(item.name, locale)}
+                  {item.note && (
+                    <span className="block text-sm text-muted">{localize(item.note, locale)}</span>
+                  )}
                 </li>
               ))}
             </ul>
           </div>
         ))}
+      </div>
+
+      {/* Guests are welcome to give anything else they think we'd like */}
+      <div className="reveal mx-auto mt-8 max-w-2xl text-center">
+        <h3 className="font-serif text-2xl">{t("otherTitle")}</h3>
+        <p className="mt-2 leading-relaxed text-muted">{t("otherBody")}</p>
       </div>
 
       {registry.cashFunds.length > 0 && (

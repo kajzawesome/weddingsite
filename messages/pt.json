@@ -16,13 +16,8 @@
     "photoAlt": "{first} e {second}",
     "daysToGo": "{count, plural, one {Falta # dia} other {Faltam # dias}}",
     "today": "Chegou o grande dia!",
-    "nav": {
-      "story": "Nossa história",
-      "schedule": "O grande dia",
-      "reception": "Recepção",
-      "faq": "Dúvidas",
-      "rsvp": "Confirmar presença"
-    }
+    "rsvp": "Confirmar presença",
+    "skip": "Pular"
   },
   "Story": {
     "title": "Nossa história",
@@ -155,22 +150,81 @@
       "title": "Como presentear",
       "intro": "Envie um presente por qualquer uma dessas opções e deixe uma mensagem dizendo para qual fundo é (por exemplo, “Lua de mel”).",
       "soon": "Em breve",
-      "copied": "Copiado!",
       "boxTitle": "Caixa de cartões na recepção",
       "boxBody": "Prefere dar em dinheiro ou um cartão? Teremos uma caixa de cartões na recepção."
-    }
+    },
+    "otherTitle": "Pensou em outra coisa?",
+    "otherBody": "Estas são só ideias. Se você vir algo que acha que vamos amar, ficaremos muito felizes com qualquer presente escolhido com carinho."
   },
   "Gallery": {
-    "title": "Galeria de fotos",
-    "soon": "A galeria abre quando o casamento começar. Volte no dia para ver as fotos de todos.",
-    "share": "Enviar fotos"
+    "title": "Nossas fotos",
+    "intro": "Algumas favoritas do nosso noivado na Bahia, com selfies e tudo. No dia do casamento esta página vira um álbum compartilhado, e queremos TUDO: cada foto e vídeo, tremido, espontâneo ou engraçado.",
+    "engagementTitle": "Noivado",
+    "dayTitle": "No dia do casamento",
+    "steps": {
+      "scan": {
+        "title": "Escaneie o QR code",
+        "body": "Tem um em cada mesa."
+      },
+      "name": {
+        "title": "Coloque seu nome",
+        "body": "Só uma vez, para sabermos quem registrou cada momento."
+      },
+      "share": {
+        "title": "Compartilhe fotos e vídeos",
+        "body": "O envio funciona mesmo com sinal fraco e termina sozinho quando a conexão volta."
+      }
+    },
+    "opens": "O álbum compartilhado abre aqui quando o casamento começar.",
+    "ideasTitle": "Ideias de fotos",
+    "ideas": {
+      "grandparents": "Uma foto com os avós",
+      "danceFloor": "A pista de dança vista de cima",
+      "tableSelfie": "A melhor selfie da sua mesa",
+      "firstDance": "A nossa primeira dança",
+      "laugh": "Alguém no meio de uma risada",
+      "details": "Os detalhes: flores, alianças, bolo"
+    },
+    "share": "Ir para o envio de fotos"
   },
   "Share": {
     "title": "Compartilhe suas fotos",
-    "soon": "No dia do casamento, escaneie o QR code na sua mesa para enviar fotos e vídeos direto do celular.",
-    "gallery": "Ver a galeria"
+    "intro": "Adicione suas fotos e vídeos de hoje. Eles vão direto para o nosso álbum compartilhado, e queremos todos!",
+    "codeTitle": "Digite o código do evento",
+    "codeHint": "Ele está no cartão da sua mesa, embaixo do QR code.",
+    "wrongCode": "Esse código não funcionou. Confira o cartão da sua mesa.",
+    "nameTitle": "Qual é o seu nome?",
+    "nameHint": "Para sabermos quem registrou cada momento. Vamos lembrar neste celular.",
+    "continue": "Continuar",
+    "hello": "Oi, {name}!",
+    "notYou": "Não é você?",
+    "pick": "Escolher fotos e vídeos",
+    "pickHint": "Escolha quantas quiser. Vídeos de até 60 segundos.",
+    "keepOpen": "Deixe esta página aberta enquanto enviam. Se o sinal cair, o envio termina sozinho quando a conexão voltar.",
+    "offline": "Você está sem internet. Suas fotos estão salvas no celular e serão enviadas quando o sinal voltar.",
+    "progress": "{done} de {total} enviadas",
+    "allDone": "Tudo enviado. Obrigado!",
+    "video": "Vídeo",
+    "notReady": "O envio de fotos ainda não está aberto. Volte no dia do casamento!",
+    "status": {
+      "waiting": "Aguardando",
+      "uploading": "Enviando {percent}%",
+      "retrying": "Sinal fraco, tentando de novo…",
+      "done": "Enviada"
+    },
+    "errors": {
+      "tooLong": "Mais de 60 segundos",
+      "tooBig": "Grande demais (máx. 100 MB)",
+      "failed": "Não foi possível enviar"
+    },
+    "galleryLink": "Ver a página de fotos"
   },
   "Footer": {
     "madeWith": "Feito com amor por {first} & {second}"
+  },
+  "LanguageSuggest": {
+    "text": "Este site também está em português.",
+    "switch": "Mudar para português",
+    "dismiss": "Não, obrigado"
   }
 }
