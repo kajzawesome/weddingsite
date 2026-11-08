@@ -1,0 +1,88 @@
+{
+  "currency": "USD",
+  "stores": [
+    {
+      "id": "amazon",
+      "name": "Amazon",
+      "url": "TODO: paste Amazon registry link"
+    },
+    {
+      "id": "target",
+      "name": "Target",
+      "url": "TODO: paste Target registry link"
+    },
+    {
+      "id": "cash",
+      "name": "Cash fund",
+      "url": "TODO: paste Zola or Honeyfund link"
+    }
+  ],
+  "categories": [
+    {
+      "id": "kitchen",
+      "title": "Kitchen and cooking",
+      "items": [
+        { "name": "Chef's knife + honing rod", "priority": "must", "price": "$80-$180", "store": "amazon" },
+        { "name": "Stainless tri-ply cookware set", "priority": "must", "price": "$200-$500", "store": "amazon" },
+        { "name": "Enameled Dutch oven, 5-6 qt", "priority": "must", "price": "$80-$400", "store": "amazon" },
+        { "name": "Nonstick skillets, 2 sizes", "priority": "must", "price": "$40-$100", "store": "target" },
+        { "name": "Large wood cutting board", "priority": "must", "price": "$40-$100", "store": "amazon" },
+        { "name": "Instant-read thermometer", "priority": "must", "price": "$25-$100", "store": "amazon" },
+        { "name": "Glass food storage set", "priority": "must", "price": "$30-$60", "store": "target" },
+        { "name": "Sheet pans + baking dishes", "priority": "nice", "price": "$30-$80", "store": "target" },
+        { "name": "Blender or food processor", "priority": "nice", "price": "$80-$400", "store": "amazon" },
+        { "name": "Coffee or espresso setup", "priority": "nice", "price": "$50-$700", "store": "amazon" },
+        { "name": "Multicooker or air fryer", "priority": "nice", "price": "$80-$200", "store": "target" },
+        { "name": "Magnetic knife strip", "priority": "nice", "price": "$30-$80", "store": "amazon" },
+        { "name": "Matching spice jars + rack", "priority": "nice", "price": "$30-$70", "store": "amazon" },
+        { "name": "Aprons + kitchen towels", "priority": "nice", "price": "$25-$60", "store": "target" },
+        { "name": "Stand mixer", "priority": "splurge", "price": "$300-$500", "store": "amazon", "note": "Group gift" }
+      ]
+    },
+    {
+      "id": "dining",
+      "title": "Dining",
+      "items": [
+        { "name": "Stoneware dinnerware, per place setting", "priority": "must", "price": "$25-$60", "store": "target", "note": "Need 8" },
+        { "name": "Flatware, per place setting", "priority": "must", "price": "$15-$50", "store": "amazon", "note": "Need 8" },
+        { "name": "Everyday glasses + wine glasses", "priority": "must", "price": "$40-$120", "store": "target" },
+        { "name": "Serving bowls + platter", "priority": "must", "price": "$40-$150", "store": "target" },
+        { "name": "Linen napkins, set of 8", "priority": "nice", "price": "$30-$70", "store": "amazon" },
+        { "name": "Mugs, set of 4-6", "priority": "nice", "price": "$25-$60", "store": "target" },
+        { "name": "Wood cheese or serving board", "priority": "nice", "price": "$30-$90", "store": "amazon" }
+      ]
+    },
+    {
+      "id": "bed-bath",
+      "title": "Bedroom and bath",
+      "items": [
+        { "name": "Sheet sets, 2", "priority": "must", "price": "$60-$250 each", "store": "target" },
+        { "name": "Duvet insert + cover", "priority": "must", "price": "$100-$350", "store": "target" },
+        { "name": "Pillows, 2-4", "priority": "must", "price": "$40-$200", "store": "amazon" },
+        { "name": "Bath towel sets, 2", "priority": "must", "price": "$50-$150 each", "store": "target" },
+        { "name": "Throw blanket", "priority": "nice", "price": "$40-$150", "store": "target" },
+        { "name": "Bath mat + shower curtain", "priority": "nice", "price": "$30-$80", "store": "target" },
+        { "name": "Matching bathrobes", "priority": "nice", "price": "$60-$200", "store": "amazon" }
+      ]
+    },
+    {
+      "id": "home",
+      "title": "Home and decor",
+      "items": [
+        { "name": "Cordless stick vacuum", "priority": "must", "price": "$150-$500", "store": "amazon" },
+        { "name": "Throw pillow covers, set of 4", "priority": "nice", "price": "$30-$80", "store": "target" },
+        { "name": "Area rug for living room", "priority": "splurge", "price": "$150-$400", "store": "target" },
+        { "name": "Picture frames for wedding photos", "priority": "nice", "price": "$30-$150", "store": "target" },
+        { "name": "Indoor plants + planters", "priority": "nice", "price": "$30-$100", "store": "amazon" },
+        { "name": "Tool kit + cordless drill", "priority": "nice", "price": "$60-$200", "store": "amazon" },
+        { "name": "Luggage set", "priority": "must", "price": "$150-$600", "store": "amazon" }
+      ]
+    }
+  ],
+  "cashFunds": [
+    { "name": "Honeymoon fund", "amounts": [25, 50, 100, 250] },
+    { "name": "Home upgrade fund", "amounts": [50, 100, 250] },
+    { "name": "Experiences fund", "amounts": [25, 75] },
+    { "name": "Visa and travel fund", "amounts": [50, 100], "note": "Optional: remove if you'd rather keep this private" }
+  ]
+}
