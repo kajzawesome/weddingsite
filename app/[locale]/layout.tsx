@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { locale as rootLocale } from "next/root-params";
 import { event } from "@/config/event";
 import { routing } from "@/i18n/routing";
-import { sans, serif } from "@/lib/fonts";
+import { sans, script, serif } from "@/lib/fonts";
 import { Footer } from "./_components/Footer";
 import { Header } from "./_components/Header";
 import "../globals.css";
@@ -34,9 +34,10 @@ export default async function LocaleLayout({
   return (
     <html
       lang={htmlLang[locale]}
-      className={`${serif.variable} ${sans.variable} antialiased`}
+      className={`${serif.variable} ${sans.variable} ${script.variable} antialiased`}
     >
       <body className="flex min-h-dvh flex-col">
+        <div aria-hidden className="page-glow" />
         <NextIntlClientProvider>
           <Header />
           <main className="flex-1">{children}</main>

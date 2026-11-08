@@ -14,6 +14,25 @@ export async function Faq() {
       q: t("dressCode.q"),
       a: event.dressCode ? localize(event.dressCode, locale) : t("dressCode.soon"),
     },
+    { q: t("sealing.q"), a: t("sealing.a") },
+    { q: t("food.q"), a: t("food.a") },
+    { q: t("airport.q"), a: t("airport.a") },
+    {
+      q: t("hotels.q"),
+      a: (
+        <>
+          {t("hotels.a")}{" "}
+          <a
+            href="https://www.google.com/maps/search/hotels+near+Provo,+UT"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary-dark underline underline-offset-4"
+          >
+            {t("hotels.link")}
+          </a>
+        </>
+      ),
+    },
     { q: t("kids.q"), a: t("kids.a") },
     { q: t("photos.q"), a: t("photos.a") },
     {
@@ -21,7 +40,7 @@ export async function Faq() {
       a: (
         <>
           {t("gifts.a")}{" "}
-          <Link href="/registry" className="text-sage-dark underline underline-offset-4">
+          <Link href="/registry" className="text-primary-dark underline underline-offset-4">
             {t("gifts.link")}
           </Link>
         </>
@@ -32,7 +51,7 @@ export async function Faq() {
   return (
     <Section id="faq" title={t("title")}>
       {/* <details> gives an accordion with no JavaScript */}
-      <div className="divide-y divide-line rounded-2xl border border-line bg-paper">
+      <div className="glass divide-y divide-white/70 rounded-3xl">
         {items.map(({ q, a }) => (
           <details key={q} className="group px-5 py-4">
             <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-medium">

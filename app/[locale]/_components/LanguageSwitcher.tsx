@@ -19,9 +19,9 @@ export function LanguageSwitcher({ label }: { label: string }) {
           href={pathname}
           locale={locale}
           aria-current={locale === current ? "true" : undefined}
-          className={`rounded-full px-2 py-1 text-xs tracking-wide ${
+          className={`rounded-full px-1.5 py-1 text-xs sm:px-2 tracking-wide ${
             locale === current
-              ? "bg-sage text-paper"
+              ? "bg-primary text-paper"
               : "text-muted hover:text-ink"
           }`}
         >

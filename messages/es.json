@@ -7,29 +7,63 @@
     "home": "Inicio",
     "registry": "Regalos",
     "rsvp": "Confirmar asistencia",
-    "language": "Idioma"
+    "language": "Idioma",
+    "photos": "Fotos"
   },
   "Hero": {
-    "kicker": "Nos casamos",
-    "names": "{first} & {second}",
+    "kicker": "La boda de",
     "dateSoon": "Fecha próximamente",
-    "scroll": "Ver los detalles"
+    "photoAlt": "{first} y {second}",
+    "daysToGo": "{count, plural, one {Falta # día} other {Faltan # días}}",
+    "today": "¡Hoy es el gran día!",
+    "nav": {
+      "story": "Nuestra historia",
+      "schedule": "El gran día",
+      "reception": "Recepción",
+      "faq": "Preguntas",
+      "rsvp": "Confirmar asistencia"
+    }
   },
   "Story": {
     "title": "Nuestra historia",
-    "body": "Aquí irá nuestra historia: cómo nos conocimos, la primera cita y el momento en que lo supimos. Pronto la contamos."
+    "proposalTitle": "La propuesta",
+    "p1": "Hicimos match en Mutual en diciembre de 2023. A Tayna le gustó KAJ primero, así que él también deslizó, y fue ella quien escribió primero. Hablamos durante algunas semanas.",
+    "p2": "Luego la vida nos llevó por caminos distintos: Tayna fue consejera de FSY y empezó su misión, y KAJ estaba ocupado con el trabajo y los estudios en BYU.",
+    "p3": "Más tarde, KAJ fue aceptado en unas prácticas de BYU en la Universidad de São Paulo, con beca completa, y lo publicó en sus historias. Tayna le escribió: “¡Felicidades, te va a encantar!” Le preguntó qué era lo que más le emocionaba y si alguna vez había estado en Brasil. Desde entonces no hemos dejado de hablar.",
+    "p4": "Después de dos o tres meses, supimos que esto era algo completamente diferente. En cuanto terminaron las prácticas, KAJ fue a visitar a Tayna en su ciudad, Vitória da Conquista, en Bahía.",
+    "p5": "Como ya habíamos hablado de casarnos, KAJ compró el anillo antes del viaje para asegurarse de tenerlo a tiempo. Pero el día que lo compró estaba tan nervioso que evitó a Tayna todo el día, hasta que ella le preguntó: “¿Estás enojado conmigo o qué?” Él no pudo guardar el secreto: “Compré un anillo. Te voy a pedir matrimonio más tarde.”",
+    "p6": "Y lo hizo. El 16 de agosto de 2025, al atardecer, frente a las colinas a las afueras de Vitória da Conquista, Tayna dijo que sí. Ahora no vemos la hora de pasar el resto de la eternidad juntos."
   },
   "Schedule": {
     "title": "El gran día",
-    "ceremony": "Ceremonia",
     "reception": "Recepción",
     "timeSoon": "Hora por confirmar",
     "venueSoon": "Lugar por confirmar",
-    "map": "Abrir en el mapa"
+    "map": "Abrir en el mapa",
+    "sealing": "Sellamiento en el templo",
+    "ringCeremony": "Ceremonia de anillos",
+    "sealingNote": "Solo con invitación. Una ceremonia pequeña y sagrada con la familia cercana.",
+    "ringNote": "Una ceremonia breve e íntima justo antes de la recepción.",
+    "receptionNote": "Primeros bailes y unas palabras, y luego mucho baile. Llega y vete cuando quieras."
   },
-  "Travel": {
-    "title": "Viaje y alojamiento",
-    "body": "Sugerencias de hoteles, aeropuertos y cómo moverse aparecerán aquí cuando el lugar esté confirmado."
+  "Reception": {
+    "title": "En la recepción",
+    "dance": {
+      "title": "Ven listo para bailar",
+      "body": "A los dos nos encanta bailar y la buena música. Ven con ganas de pasarla muy bien con nosotros."
+    },
+    "comeGo": {
+      "title": "Quédate el tiempo que quieras",
+      "body": "Empezaremos con nuestros primeros bailes y unas palabras. Después, puedes llegar e irte cuando quieras."
+    },
+    "sayHi": {
+      "title": "Ven a saludarnos",
+      "body": "Ven a buscarnos y preséntate, sobre todo si todavía no nos conocemos (¡o si ha pasado tiempo!). Estamos muy emocionados de conocer a las familias y amigos del otro. Y nos encantan los abrazos, así que ven a darnos uno."
+    },
+    "food": {
+      "title": "Refrigerio ligero",
+      "body": "Tendremos un refrigerio ligero, con minihamburguesas, fruta, verduras y aperitivos. Ven con hambre para picar algo, pero por favor no cuentes con una comida completa."
+    }
   },
   "Faq": {
     "title": "Preguntas",
@@ -38,26 +72,74 @@
       "soon": "Pronto compartiremos el código de vestimenta."
     },
     "kids": {
-      "q": "¿Pueden venir niños?",
-      "a": "Lo confirmaremos con las invitaciones."
+      "q": "¿Los niños son bienvenidos?",
+      "a": "¡Sí, los niños son bienvenidos! Solo les pedimos que sean reverentes y respetuosos."
     },
     "photos": {
       "q": "¿Puedo tomar fotos?",
-      "a": "¡Claro! Ese día podrás escanear un código QR y subir tus fotos a nuestro álbum compartido."
+      "a": "¡Sí, toma todas las que puedas! Ese día podrás escanear un código QR y subirlas a nuestro álbum compartido."
     },
     "gifts": {
       "q": "¿Tienen lista de regalos?",
-      "a": "Tu presencia es el mejor regalo. Si quieres darnos algo, nuestra lista tiene algunas ideas.",
+      "a": "¡Sí! Tenerte ahí es el mejor regalo, pero si quieres darnos algo, nuestra lista tiene algunas ideas.",
       "link": "Ver la lista"
+    },
+    "sealing": {
+      "q": "¿Qué es un sellamiento en el templo?",
+      "a": "El sellamiento es la forma en que los miembros de La Iglesia de Jesucristo de los Santos de los Últimos Días se casan en el templo, por el tiempo y por toda la eternidad. Es una ceremonia pequeña, solo con invitación. ¡Tenemos muchas ganas de celebrar con todos en la recepción!"
+    },
+    "food": {
+      "q": "¿Habrá comida?",
+      "a": "Sí, un refrigerio ligero con minihamburguesas, fruta, verduras y aperitivos. No será una comida completa, así que tenlo en cuenta."
+    },
+    "airport": {
+      "q": "¿Vienes de fuera? ¿A qué aeropuerto debo volar?",
+      "a": "La boda será en Provo, Utah. El aeropuerto principal más cercano es el Aeropuerto Internacional de Salt Lake City (SLC), a unos 45 minutos en coche hacia el norte."
+    },
+    "hotels": {
+      "q": "¿Dónde puedo hospedarme?",
+      "a": "Hay muchos hoteles en Provo y en la vecina Orem.",
+      "link": "Ver hoteles cerca de Provo"
     }
   },
   "Rsvp": {
     "title": "¿Nos acompañas?",
     "button": "Confirmar asistencia",
-    "deadline": "Por favor, responde antes del {date}",
-    "soonTitle": "La confirmación abre pronto",
-    "soonBody": "Te avisaremos en cuanto puedas responder. ¡Gracias por tu paciencia!",
-    "back": "Volver al inicio"
+    "deadline": "Por favor, responde antes del {date}.",
+    "back": "Volver al inicio",
+    "intro": "Cuéntanos si puedes venir. Solo toma un minuto.",
+    "fields": {
+      "name": "Nombre completo",
+      "email": "Correo electrónico",
+      "emailHint": "Te enviaremos la confirmación aquí.",
+      "attending": "¿Vendrás?",
+      "yes": "Con gusto asistiré",
+      "no": "Lamentablemente no podré ir",
+      "guests": "¿Cuántos vienen, contándote a ti?",
+      "guestOption": "{count, plural, one {Solo yo} =2 {2 (yo + un acompañante)} other {# personas}}",
+      "message": "Un mensaje para nosotros",
+      "optional": "opcional"
+    },
+    "submit": "Enviar confirmación",
+    "sending": "Enviando…",
+    "thanks": "¡Gracias, {name}!",
+    "doneYes": "Recibimos tu confirmación y te enviamos un correo. ¡Tenemos muchas ganas de celebrar contigo!",
+    "doneNo": "Gracias por avisarnos. Te vamos a extrañar, y te enviamos una confirmación a tu correo.",
+    "errors": {
+      "check": "Por favor, revisa los campos marcados.",
+      "name": "Por favor, escribe tu nombre.",
+      "email": "Por favor, escribe un correo válido.",
+      "guests": "Por favor, elige cuántos vienen.",
+      "server": "Algo salió mal al guardar tu confirmación. Inténtalo de nuevo en un momento."
+    },
+    "email": {
+      "subject": "Tu confirmación para la boda de {first} y {second}",
+      "greeting": "Hola, {name}:",
+      "yes": "{count, plural, one {¡Gracias por confirmar! Te guardamos un lugar.} other {¡Gracias por confirmar! Guardamos lugares para # personas.}} Tenemos muchas ganas de celebrar contigo.",
+      "no": "Gracias por avisarnos. Te vamos a extrañar, y agradecemos mucho tu cariño y apoyo.",
+      "change": "¿Necesitas cambiar algo? Solo responde a este correo.",
+      "signoff": "Con cariño,\n{first} y {second}"
+    }
   },
   "Registry": {
     "title": "Lista de regalos",
@@ -66,7 +148,27 @@
     "linkSoon": "Enlace próximamente",
     "ideasTitle": "Ideas",
     "fundsTitle": "O contribuye a un fondo",
-    "fundsIntro": "¿Prefieres aportar a algo más grande? Para esto estamos ahorrando."
+    "fundsIntro": "¿Prefieres aportar a algo más grande? Para esto estamos ahorrando.",
+    "contribute": "Contribuir",
+    "show": "Ver {name}",
+    "give": {
+      "title": "Cómo hacer un regalo",
+      "intro": "Envía un regalo con cualquiera de estas opciones y añade una nota indicando para qué fondo es (por ejemplo, “Luna de miel”).",
+      "soon": "Próximamente",
+      "copied": "¡Copiado!",
+      "boxTitle": "Caja de tarjetas en la recepción",
+      "boxBody": "¿Prefieres dar efectivo o una tarjeta? Tendremos una caja de tarjetas en la recepción."
+    }
+  },
+  "Gallery": {
+    "title": "Galería de fotos",
+    "soon": "La galería se abre cuando empiece la boda. Vuelve ese día para ver las fotos de todos.",
+    "share": "Subir fotos"
+  },
+  "Share": {
+    "title": "Comparte tus fotos",
+    "soon": "El día de la boda, escanea el código QR de tu mesa para subir fotos y videos directo desde tu teléfono.",
+    "gallery": "Ver la galería"
   },
   "Footer": {
     "madeWith": "Hecho con amor por {first} y {second}"

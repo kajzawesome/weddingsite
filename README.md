@@ -13,10 +13,10 @@ Build steps: see PLAN.md. Rules for Claude Code: see CLAUDE.md.
 - Languages: English (default), Portuguese, Spanish via a toggle in the header (next-intl, files in /messages/en.json, pt.json, es.json)
 
 ## Look and feel
-- Colours: [e.g. sage, cream, gold]
-- Fonts: [e.g. a serif for names, a clean sans for text]
+- Colours: blue, pink, gold
+- Fonts: Cormorant Garamond (names, headings), Inter (text)
 - Hero: [video file or photo]
-- Tone: [romantic / playful / minimal]
+- Tone: romantic, professional
 
 ## Features
 - [ ] Invite page (story, schedule, travel, FAQ)

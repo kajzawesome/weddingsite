@@ -8,7 +8,7 @@ export async function StoreButtons() {
   const locale = await getLocale();
 
   return (
-    <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
+    <div className="grid gap-3 sm:grid-cols-3">
       {registry.stores.map((store) => {
         const name = localize(store.name, locale);
         return store.url ? (
@@ -17,16 +17,17 @@ export async function StoreButtons() {
             href={store.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full bg-sage px-6 py-3 text-center font-medium text-paper hover:bg-sage-dark"
+            className="rounded-full bg-primary px-6 py-3 text-center font-medium text-paper ring-1 ring-gold/40 hover:bg-primary-dark"
           >
             {name}
           </a>
         ) : (
           <span
             key={store.id}
-            className="rounded-full border border-dashed border-line px-6 py-3 text-center text-muted"
+            className="glass flex flex-col rounded-2xl px-6 py-3 text-center"
           >
-            {name} · {t("linkSoon")}
+            <span className="font-medium">{name}</span>
+            <span className="text-xs text-muted">{t("linkSoon")}</span>
           </span>
         );
       })}

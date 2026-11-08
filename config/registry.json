@@ -1,75 +1,371 @@
 {
   "stores": [
-    { "id": "amazon", "name": "Amazon", "url": null },
-    { "id": "target", "name": "Target", "url": null },
-    { "id": "cash", "name": { "en": "Cash fund", "pt": "Fundo em dinheiro", "es": "Fondo en efectivo" }, "url": null }
+    {
+      "id": "amazon",
+      "name": "Amazon",
+      "url": null
+    },
+    {
+      "id": "target",
+      "name": "Target",
+      "url": null
+    }
   ],
   "categories": [
     {
       "id": "kitchen",
-      "title": { "en": "Kitchen and cooking", "pt": "Cozinha", "es": "Cocina" },
+      "title": {
+        "en": "Kitchen",
+        "pt": "Cozinha",
+        "es": "Cocina"
+      },
       "items": [
-        { "name": { "en": "Chef's knife + honing rod", "pt": "Faca de chef + chaira", "es": "Cuchillo de chef + chaira" } },
-        { "name": { "en": "Stainless steel cookware set", "pt": "Jogo de panelas de inox", "es": "Juego de ollas de acero inoxidable" } },
-        { "name": { "en": "Enameled Dutch oven", "pt": "Panela de ferro esmaltada", "es": "Olla de hierro esmaltada" } },
-        { "name": { "en": "Nonstick skillets", "pt": "Frigideiras antiaderentes", "es": "Sartenes antiadherentes" } },
-        { "name": { "en": "Large wood cutting board", "pt": "Tábua de corte grande de madeira", "es": "Tabla de cortar grande de madera" } },
-        { "name": { "en": "Instant-read thermometer", "pt": "Termômetro de cozinha", "es": "Termómetro de cocina" } },
-        { "name": { "en": "Glass food storage set", "pt": "Potes de vidro", "es": "Recipientes de vidrio" } },
-        { "name": { "en": "Sheet pans + baking dishes", "pt": "Assadeiras e refratários", "es": "Bandejas y fuentes para horno" } },
-        { "name": { "en": "Blender or food processor", "pt": "Liquidificador ou processador", "es": "Licuadora o procesador" } },
-        { "name": { "en": "Coffee or espresso setup", "pt": "Cafeteira ou máquina de espresso", "es": "Cafetera o máquina de espresso" } },
-        { "name": { "en": "Multicooker or air fryer", "pt": "Panela elétrica ou air fryer", "es": "Olla multifunción o freidora de aire" } },
-        { "name": { "en": "Magnetic knife strip", "pt": "Barra magnética para facas", "es": "Barra magnética para cuchillos" } },
-        { "name": { "en": "Spice jars + rack", "pt": "Porta-temperos", "es": "Especieros" } },
-        { "name": { "en": "Aprons + kitchen towels", "pt": "Aventais e panos de prato", "es": "Delantales y paños de cocina" } },
-        { "name": { "en": "Stand mixer", "pt": "Batedeira planetária", "es": "Batidora de pie" }, "note": { "en": "Great as a group gift", "pt": "Ótimo para presente em grupo", "es": "Ideal como regalo en grupo" } }
+        {
+          "name": {
+            "en": "Pots and pans",
+            "pt": "Panelas e frigideiras",
+            "es": "Ollas y sartenes"
+          }
+        },
+        {
+          "name": {
+            "en": "Enameled Dutch oven",
+            "pt": "Panela de ferro esmaltada",
+            "es": "Olla de hierro esmaltada"
+          }
+        },
+        {
+          "name": {
+            "en": "Cast iron skillet",
+            "pt": "Frigideira de ferro fundido",
+            "es": "Sartén de hierro fundido"
+          }
+        },
+        {
+          "name": {
+            "en": "Stand mixer",
+            "pt": "Batedeira planetária",
+            "es": "Batidora de pie"
+          },
+          "note": {
+            "en": "Great as a group gift",
+            "pt": "Ótimo para presente em grupo",
+            "es": "Ideal como regalo en grupo"
+          }
+        },
+        {
+          "name": {
+            "en": "Blender",
+            "pt": "Liquidificador",
+            "es": "Licuadora"
+          }
+        },
+        {
+          "name": {
+            "en": "Large wood cutting board",
+            "pt": "Tábua de corte grande de madeira",
+            "es": "Tabla de cortar grande de madera"
+          }
+        },
+        {
+          "name": {
+            "en": "Charcuterie board",
+            "pt": "Tábua de frios",
+            "es": "Tabla de embutidos y quesos"
+          }
+        },
+        {
+          "name": {
+            "en": "Spices + spice rack",
+            "pt": "Temperos + porta-temperos",
+            "es": "Especias + especiero"
+          }
+        },
+        {
+          "name": {
+            "en": "Instant-read thermometer",
+            "pt": "Termômetro de cozinha",
+            "es": "Termómetro de cocina"
+          }
+        },
+        {
+          "name": {
+            "en": "Glass food storage set",
+            "pt": "Potes de vidro",
+            "es": "Recipientes de vidrio"
+          }
+        },
+        {
+          "name": {
+            "en": "Aprons + kitchen towels",
+            "pt": "Aventais e panos de prato",
+            "es": "Delantales y paños de cocina"
+          }
+        },
+        {
+          "name": {
+            "en": "Waffle maker",
+            "pt": "Máquina de waffle",
+            "es": "Wafflera"
+          }
+        },
+        {
+          "name": {
+            "en": "Rice cooker",
+            "pt": "Panela elétrica de arroz",
+            "es": "Olla arrocera"
+          }
+        },
+        {
+          "name": {
+            "en": "Salad bowl + servers",
+            "pt": "Saladeira + talheres de servir",
+            "es": "Ensaladera + cubiertos para servir"
+          }
+        }
       ]
     },
     {
-      "id": "dining",
-      "title": { "en": "Dining", "pt": "Mesa", "es": "Mesa" },
+      "id": "bedroom",
+      "title": {
+        "en": "Bedroom and bath",
+        "pt": "Quarto e banho",
+        "es": "Dormitorio y baño"
+      },
       "items": [
-        { "name": { "en": "Stoneware dinnerware", "pt": "Aparelho de jantar", "es": "Vajilla de gres" }, "note": { "en": "Set for 8", "pt": "Para 8 pessoas", "es": "Para 8 personas" } },
-        { "name": { "en": "Flatware", "pt": "Faqueiro", "es": "Cubiertos" }, "note": { "en": "Set for 8", "pt": "Para 8 pessoas", "es": "Para 8 personas" } },
-        { "name": { "en": "Everyday glasses + wine glasses", "pt": "Copos e taças de vinho", "es": "Vasos y copas de vino" } },
-        { "name": { "en": "Serving bowls + platter", "pt": "Travessas e saladeiras", "es": "Fuentes y ensaladeras" } },
-        { "name": { "en": "Linen napkins", "pt": "Guardanapos de linho", "es": "Servilletas de lino" } },
-        { "name": { "en": "Mugs", "pt": "Canecas", "es": "Tazas" } },
-        { "name": { "en": "Cheese or serving board", "pt": "Tábua de frios", "es": "Tabla para quesos" } }
-      ]
-    },
-    {
-      "id": "bed-bath",
-      "title": { "en": "Bedroom and bath", "pt": "Quarto e banho", "es": "Dormitorio y baño" },
-      "items": [
-        { "name": { "en": "Sheet sets", "pt": "Jogos de lençol", "es": "Juegos de sábanas" } },
-        { "name": { "en": "Duvet + cover", "pt": "Edredom + capa", "es": "Edredón + funda" } },
-        { "name": { "en": "Pillows", "pt": "Travesseiros", "es": "Almohadas" } },
-        { "name": { "en": "Bath towel sets", "pt": "Jogos de toalha", "es": "Juegos de toallas" } },
-        { "name": { "en": "Throw blanket", "pt": "Manta", "es": "Manta" } },
-        { "name": { "en": "Bath mat + shower curtain", "pt": "Tapete de banheiro + cortina", "es": "Alfombra de baño + cortina" } },
-        { "name": { "en": "Matching bathrobes", "pt": "Roupões combinando", "es": "Batas de baño a juego" } }
+        {
+          "name": {
+            "en": "Nicer queen sheet set",
+            "pt": "Jogo de lençol queen de qualidade",
+            "es": "Juego de sábanas queen de calidad"
+          }
+        },
+        {
+          "name": {
+            "en": "Queen duvet + cover",
+            "pt": "Edredom queen + capa",
+            "es": "Edredón queen + funda"
+          }
+        },
+        {
+          "name": {
+            "en": "Throw blankets",
+            "pt": "Mantas",
+            "es": "Mantas"
+          }
+        },
+        {
+          "name": {
+            "en": "Matching bathrobes",
+            "pt": "Roupões combinando",
+            "es": "Batas de baño a juego"
+          }
+        },
+        {
+          "name": {
+            "en": "Mattress topper",
+            "pt": "Pillow top para colchão",
+            "es": "Cubrecolchón acolchado"
+          }
+        },
+        {
+          "name": {
+            "en": "Weighted blanket",
+            "pt": "Cobertor ponderado",
+            "es": "Manta con peso"
+          }
+        },
+        {
+          "name": {
+            "en": "Heated blanket",
+            "pt": "Cobertor elétrico",
+            "es": "Manta eléctrica"
+          }
+        },
+        {
+          "name": {
+            "en": "Blackout curtains",
+            "pt": "Cortinas blackout",
+            "es": "Cortinas opacas"
+          }
+        }
       ]
     },
     {
       "id": "home",
-      "title": { "en": "Home", "pt": "Casa", "es": "Hogar" },
+      "title": {
+        "en": "Home",
+        "pt": "Casa",
+        "es": "Hogar"
+      },
       "items": [
-        { "name": { "en": "Cordless stick vacuum", "pt": "Aspirador vertical sem fio", "es": "Aspiradora inalámbrica" } },
-        { "name": { "en": "Throw pillow covers", "pt": "Capas de almofada", "es": "Fundas de cojín" } },
-        { "name": { "en": "Living room rug", "pt": "Tapete para a sala", "es": "Alfombra para la sala" } },
-        { "name": { "en": "Frames for wedding photos", "pt": "Porta-retratos para as fotos do casamento", "es": "Marcos para las fotos de la boda" } },
-        { "name": { "en": "Indoor plants + planters", "pt": "Plantas e vasos", "es": "Plantas y macetas" } },
-        { "name": { "en": "Tool kit + cordless drill", "pt": "Kit de ferramentas + furadeira", "es": "Caja de herramientas + taladro" } },
-        { "name": { "en": "Luggage set", "pt": "Jogo de malas", "es": "Juego de maletas" } }
+        {
+          "name": {
+            "en": "Living room rug",
+            "pt": "Tapete para a sala",
+            "es": "Alfombra para la sala"
+          }
+        },
+        {
+          "name": {
+            "en": "Throw pillow covers",
+            "pt": "Capas de almofada",
+            "es": "Fundas de cojín"
+          }
+        },
+        {
+          "name": {
+            "en": "Frames for wedding photos",
+            "pt": "Porta-retratos para as fotos do casamento",
+            "es": "Marcos para las fotos de la boda"
+          }
+        },
+        {
+          "name": {
+            "en": "Wall decor with our names",
+            "pt": "Decoração de parede com nossos nomes",
+            "es": "Decoración de pared con nuestros nombres"
+          }
+        },
+        {
+          "name": {
+            "en": "Custom or handmade art",
+            "pt": "Arte personalizada ou feita à mão",
+            "es": "Arte personalizada o hecha a mano"
+          },
+          "note": {
+            "en": "We'd love something made by you",
+            "pt": "Adoraríamos algo feito por você",
+            "es": "Nos encantaría algo hecho por ti"
+          }
+        },
+        {
+          "name": {
+            "en": "Doormat",
+            "pt": "Capacho",
+            "es": "Felpudo"
+          }
+        },
+        {
+          "name": {
+            "en": "Smart speaker (Google Home or Alexa)",
+            "pt": "Caixa de som inteligente (Google Home ou Alexa)",
+            "es": "Altavoz inteligente (Google Home o Alexa)"
+          }
+        },
+        {
+          "name": {
+            "en": "Indoor plants + planters",
+            "pt": "Plantas e vasos",
+            "es": "Plantas y macetas"
+          }
+        },
+        {
+          "name": {
+            "en": "Cordless drill or other power tools",
+            "pt": "Furadeira sem fio ou outras ferramentas elétricas",
+            "es": "Taladro inalámbrico u otras herramientas eléctricas"
+          }
+        },
+        {
+          "name": {
+            "en": "Step ladder",
+            "pt": "Escada dobrável",
+            "es": "Escalera plegable"
+          }
+        },
+        {
+          "name": {
+            "en": "Emergency kit",
+            "pt": "Kit de emergência",
+            "es": "Kit de emergencia"
+          }
+        }
+      ]
+    },
+    {
+      "id": "fun",
+      "title": {
+        "en": "Fun and adventures",
+        "pt": "Diversão e aventuras",
+        "es": "Diversión y aventuras"
+      },
+      "items": [
+        {
+          "name": {
+            "en": "Board games",
+            "pt": "Jogos de tabuleiro",
+            "es": "Juegos de mesa"
+          }
+        },
+        {
+          "name": {
+            "en": "Picnic set",
+            "pt": "Kit de piquenique",
+            "es": "Set de pícnic"
+          }
+        },
+        {
+          "name": {
+            "en": "Camping gear (tent, hammock)",
+            "pt": "Equipamento de camping (barraca, rede)",
+            "es": "Equipo de camping (tienda, hamaca)"
+          }
+        },
+        {
+          "name": {
+            "en": "Projector for movie nights",
+            "pt": "Projetor para noites de cinema",
+            "es": "Proyector para noches de película"
+          }
+        }
       ]
     }
   ],
   "cashFunds": [
-    { "name": { "en": "Honeymoon", "pt": "Lua de mel", "es": "Luna de miel" } },
-    { "name": { "en": "Home upgrades", "pt": "Melhorias na casa", "es": "Mejoras en casa" } },
-    { "name": { "en": "Experiences together", "pt": "Experiências juntos", "es": "Experiencias juntos" } },
-    { "name": { "en": "Visa and travel", "pt": "Visto e viagens", "es": "Visa y viajes" } }
-  ]
+    {
+      "name": {
+        "en": "Honeymoon",
+        "pt": "Lua de mel",
+        "es": "Luna de miel"
+      },
+      "blurb": {
+        "en": "Help fund our honeymoon: Korea, a tropical beach, or both!",
+        "pt": "Ajude a gente na lua de mel: Coreia, uma praia tropical, ou os dois!",
+        "es": "Ayúdanos con la luna de miel: Corea, una playa tropical, ¡o las dos!"
+      },
+      "image": "/funds/honeymoon.jpg"
+    },
+    {
+      "name": {
+        "en": "Experiences together",
+        "pt": "Experiências juntos",
+        "es": "Experiencias juntos"
+      },
+      "blurb": {
+        "en": "Date nights, concerts and adventures in our first year of marriage.",
+        "pt": "Encontros, shows e aventuras no nosso primeiro ano de casados.",
+        "es": "Citas, conciertos y aventuras en nuestro primer año de casados."
+      },
+      "image": "/funds/experiences.jpg"
+    },
+    {
+      "name": {
+        "en": "Visa and travel",
+        "pt": "Visto e viagens",
+        "es": "Visa y viajes"
+      },
+      "blurb": {
+        "en": "Help with visa costs and trips to see our families.",
+        "pt": "Ajude com os custos do visto e as viagens para ver nossas famílias.",
+        "es": "Ayúdanos con los gastos de visa y los viajes para ver a nuestras familias."
+      },
+      "image": "/funds/visa-travel.jpg"
+    }
+  ],
+  "giving": {
+    "venmo": null,
+    "paypal": null,
+    "zelle": null
+  }
 }

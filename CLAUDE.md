@@ -19,7 +19,8 @@ KAJ is building this to learn. When you introduce a new concept (server actions,
 - Next.js 16 (App Router, TypeScript, Cache Components on) + Tailwind CSS v4. This Next.js is newer than most training data: read `node_modules/next/dist/docs/` before using an API (see `AGENTS.md`). Middleware is `proxy.ts`; the locale comes from `next/root-params`.
 - next-intl: English default, Portuguese (pt-BR) and Spanish toggle. All UI text lives in `messages/en.json`, `messages/pt.json`, `messages/es.json`. No hard-coded user-facing strings.
 - Framer Motion for animation (respect `prefers-reduced-motion`, always offer "skip")
-- Supabase (Postgres) for guests, RSVPs, photo records, likes
+- RSVPs: Google Sheet via Apps Script (`scripts/rsvp-apps-script.gs`), confirmation email sent from KAJ's Gmail
+- Supabase (Postgres) for photo records and likes (Phase 3+)
 - Cloudinary for photo/video storage (signed direct uploads from the browser)
 - Resend for email
 - Vercel for hosting
@@ -36,8 +37,8 @@ KAJ is building this to learn. When you introduce a new concept (server actions,
 - Before calling a phase done: `npm run lint`, `npm run build`, and check the page on a phone-sized viewport.
 
 ## Design
-- Tone: [romantic / playful / minimal — KAJ to fill]
-- Colours: [e.g. sage, cream, gold — KAJ to fill]
+- Tone: romantic but professional. No emojis or clip-art; decorative artwork (e.g. roses, sunflowers, Tayna's favourites) only from files KAJ provides
+- Colours: blue, pink and gold (tokens in `app/globals.css`: primary, blush, rose, gold)
 - Fonts: a serif for names and headings, a clean sans for body text (pick from Google Fonts via `next/font`)
 
 ## Commands

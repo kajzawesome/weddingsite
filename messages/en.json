@@ -7,29 +7,63 @@
     "home": "Home",
     "registry": "Registry",
     "rsvp": "RSVP",
-    "language": "Language"
+    "language": "Language",
+    "photos": "Photos"
   },
   "Hero": {
-    "kicker": "We're getting married",
-    "names": "{first} & {second}",
+    "kicker": "The wedding of",
     "dateSoon": "Date coming soon",
-    "scroll": "See the details"
+    "photoAlt": "{first} and {second}",
+    "daysToGo": "{count, plural, one {# day to go} other {# days to go}}",
+    "today": "Today's the day!",
+    "nav": {
+      "story": "Our story",
+      "schedule": "The day",
+      "reception": "Reception",
+      "faq": "Questions",
+      "rsvp": "RSVP"
+    }
   },
   "Story": {
     "title": "Our story",
-    "body": "This is where our story goes: how we met, the first date, and the moment we knew. We'll fill it in soon."
+    "proposalTitle": "The proposal",
+    "p1": "We matched on Mutual in December 2023. Tayna liked KAJ first, so he swiped up too, and she sent the first message. We talked for a few weeks.",
+    "p2": "Then life took us in different directions: Tayna served as an FSY counselor and started her mission, and KAJ got busy with work and school at BYU.",
+    "p3": "Later, KAJ was accepted into a BYU internship at the University of São Paulo, with a full-ride scholarship, and posted about it on his story. Tayna messaged him: “Congrats, you’re going to love it!” She asked what he was most excited for and whether he’d ever been to Brazil. We haven’t stopped talking since.",
+    "p4": "After two or three months, we knew this was something completely different. As soon as the internship ended, KAJ went to visit Tayna in her hometown, Vitória da Conquista, in Bahia.",
+    "p5": "We’d already talked about marriage, so KAJ bought the ring before the trip to make sure he had it in time. But the day he bought it, he was so nervous that he avoided Tayna all day, until she finally asked, “Are you mad at me or what?” He couldn’t keep the secret: “I bought a ring. I’m going to propose to you later.”",
+    "p6": "And he did. On August 16, 2025, at sunset, overlooking the rolling hills just outside Vitória da Conquista, Tayna said yes. Now we can’t wait to spend the rest of forever together."
   },
   "Schedule": {
     "title": "The day",
-    "ceremony": "Ceremony",
     "reception": "Reception",
     "timeSoon": "Time to be announced",
     "venueSoon": "Venue to be announced",
-    "map": "Open in Maps"
+    "map": "Open in Maps",
+    "sealing": "Temple sealing",
+    "ringCeremony": "Ring ceremony",
+    "sealingNote": "By invitation only. A small, sacred ceremony with close family.",
+    "ringNote": "A short, intimate ceremony right before the reception.",
+    "receptionNote": "First dances and a few words, then lots of dancing. Come and go as you please."
   },
-  "Travel": {
-    "title": "Travel and stay",
-    "body": "Hotel suggestions, airports and how to get around will go here once the venue is set."
+  "Reception": {
+    "title": "At the reception",
+    "dance": {
+      "title": "Come ready to dance",
+      "body": "We both love to dance and we love good music. Bring your dancing shoes and have a great time with us."
+    },
+    "comeGo": {
+      "title": "Come and go as you please",
+      "body": "We’ll start with our first dances and a few words. After that, stay as long as you like."
+    },
+    "sayHi": {
+      "title": "Come say hi",
+      "body": "Please come find us and introduce yourself, especially if we haven’t met yet (or it’s been a while!). We’re so excited to get to know each other’s families and friends. And we love hugs, so come give us one."
+    },
+    "food": {
+      "title": "Light refreshments",
+      "body": "We’ll have light refreshments like sliders, fruit, veggies and snacks. Come hungry for a bite, but please don’t plan on a full meal."
+    }
   },
   "Faq": {
     "title": "Questions",
@@ -39,25 +73,73 @@
     },
     "kids": {
       "q": "Are kids welcome?",
-      "a": "We'll confirm this with the invitations."
+      "a": "Yes, kids are welcome! We just ask that they please be reverent and respectful."
     },
     "photos": {
       "q": "Can I take photos?",
-      "a": "Yes please! On the day you'll be able to scan a QR code and add your photos to our shared album."
+      "a": "Yes, please take as many as you can! On the day you'll be able to scan a QR code and add them to our shared album."
     },
     "gifts": {
       "q": "Do you have a registry?",
-      "a": "Your being there is the best gift. If you'd like to give something, our registry has a few ideas.",
+      "a": "Yes! Having you there is the best gift, but if you'd like to give something, our registry has a few ideas.",
       "link": "See the registry"
+    },
+    "sealing": {
+      "q": "What is a temple sealing?",
+      "a": "A sealing is how members of The Church of Jesus Christ of Latter-day Saints are married in the temple, for time and all eternity. It’s a small ceremony by invitation only. We can’t wait to celebrate with everyone at the reception!"
+    },
+    "food": {
+      "q": "Will there be food?",
+      "a": "Yes, light refreshments like sliders, fruit, veggies and snacks. It won’t be a full meal, so please plan accordingly."
+    },
+    "airport": {
+      "q": "Traveling in? Which airport should I fly into?",
+      "a": "The wedding is in Provo, Utah. The closest major airport is Salt Lake City International (SLC), about 45 minutes north by car."
+    },
+    "hotels": {
+      "q": "Where should I stay?",
+      "a": "There are lots of hotels in Provo and nearby Orem.",
+      "link": "See hotels near Provo"
     }
   },
   "Rsvp": {
     "title": "Will you join us?",
     "button": "RSVP",
-    "deadline": "Please reply by {date}",
-    "soonTitle": "RSVP opens soon",
-    "soonBody": "We'll let you know as soon as you can reply. Thank you for your patience!",
-    "back": "Back to home"
+    "deadline": "Please reply by {date}.",
+    "back": "Back to home",
+    "intro": "Let us know if you can make it. It only takes a minute.",
+    "fields": {
+      "name": "Full name",
+      "email": "Email",
+      "emailHint": "We'll send your confirmation here.",
+      "attending": "Will you be there?",
+      "yes": "Joyfully accepts",
+      "no": "Regretfully declines",
+      "guests": "How many are coming, including you?",
+      "guestOption": "{count, plural, one {Just me} =2 {2 (me + a plus-one)} other {# people}}",
+      "message": "A note for us",
+      "optional": "optional"
+    },
+    "submit": "Send RSVP",
+    "sending": "Sending…",
+    "thanks": "Thank you, {name}!",
+    "doneYes": "Your RSVP is in, and a confirmation is on its way to your email. We can't wait to celebrate with you!",
+    "doneNo": "Thank you for letting us know. We'll miss you, and we've sent a confirmation to your email.",
+    "errors": {
+      "check": "Please check the highlighted fields.",
+      "name": "Please enter your name.",
+      "email": "Please enter a valid email.",
+      "guests": "Please choose how many are coming.",
+      "server": "Something went wrong saving your RSVP. Please try again in a moment."
+    },
+    "email": {
+      "subject": "Your RSVP for {first} & {second}'s wedding",
+      "greeting": "Hi {name},",
+      "yes": "{count, plural, one {Thank you for your RSVP! We've saved a spot for you.} other {Thank you for your RSVP! We've saved spots for # people.}} We can't wait to celebrate with you.",
+      "no": "Thank you for letting us know. We'll miss you, and we're so grateful for your love and support.",
+      "change": "Need to change something? Just reply to this email.",
+      "signoff": "With love,\n{first} & {second}"
+    }
   },
   "Registry": {
     "title": "Registry",
@@ -66,7 +148,27 @@
     "linkSoon": "Link coming soon",
     "ideasTitle": "Ideas",
     "fundsTitle": "Or contribute to a fund",
-    "fundsIntro": "Prefer to give toward something bigger? These are what we're saving for."
+    "fundsIntro": "Prefer to give toward something bigger? Here's what we're saving for.",
+    "contribute": "Contribute",
+    "show": "Show {name}",
+    "give": {
+      "title": "Ways to give",
+      "intro": "Send a gift with any of these, and add a note saying which fund it's for (like “Honeymoon”).",
+      "soon": "Coming soon",
+      "copied": "Copied!",
+      "boxTitle": "Card box at the reception",
+      "boxBody": "Prefer cash or a card? We'll have a card box at the reception."
+    }
+  },
+  "Gallery": {
+    "title": "Photo gallery",
+    "soon": "The gallery opens when the wedding starts. Come back on the day to see everyone's photos.",
+    "share": "Upload photos"
+  },
+  "Share": {
+    "title": "Share your photos",
+    "soon": "On the wedding day, scan the QR code at your table to upload photos and videos straight from your phone.",
+    "gallery": "See the gallery"
   },
   "Footer": {
     "madeWith": "Made with love by {first} & {second}"

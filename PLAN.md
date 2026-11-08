@@ -28,19 +28,18 @@ Learn: React components, Tailwind, App Router, i18n, deploys.
 - [x] Home page sections: hero (video with photo fallback), our story, schedule, travel and stay, FAQ, RSVP button
 - [x] Fonts via `next/font`, colours as Tailwind theme tokens
 - [x] Registry page `/registry`: what we'd love (no prices), store buttons that say "Link coming soon" until the links are added in `config/registry.json`
+- [x] Placeholder `/gallery` and `/share` pages ("opens on the wedding day"), linked as "Photos" in the header
 - [ ] Deployed on Vercel preview URL
 Done when: the page looks good on a phone in all three languages, with no hard-coded text.
 
-## Phase 2 — Guests + RSVP (1 weekend)
-Learn: Postgres, Supabase, server actions, form validation (zod).
-- [ ] Supabase tables (SQL migration in `supabase/migrations/`):
-  - `guests` (id, slug, name, email, phone, locale, party_size, invite_opened_at)
-  - `rsvps` (id, guest_id, attending, count, meal, dietary_notes, message, created_at)
-- [ ] Import guests from a CSV (script in `scripts/import-guests.ts`)
-- [ ] RSVP form at `/rsvp` (and pre-filled at `/i/[slug]/rsvp`), saved via a server action
-- [ ] Simple admin page `/admin` behind an admin password: RSVP list, counts, CSV export
-- [ ] Admin: edit the registry (items, store links) without touching code; move it from `config/registry.json` to a Supabase table
-Done when: a test guest can RSVP and it shows on `/admin`.
+## Phase 2 — RSVP (done differently than first planned)
+Decision (2026-11-08): RSVPs go to a Google Sheet instead of Supabase, so KAJ and Tayna can read them on their phones.
+- [x] RSVP form at `/rsvp`: name, email, attending yes/no, party size (1–8), optional note; spam honeypot; noindex
+- [x] Server action validates with zod, then posts to a Google Apps Script (`scripts/rsvp-apps-script.gs`) with a shared secret
+- [x] Apps Script appends a row to the "RSVPs" tab and emails the guest a confirmation in their language from KAJ's Gmail
+- [ ] KAJ: create the sheet, paste the script, deploy, add `RSVP_SCRIPT_URL` + `RSVP_SECRET` to `.env.local` and Vercel
+- [ ] Later (optional): guest list import + personal links `/i/[slug]` pre-filling the form; registry editing without code
+Done when: a real RSVP from a phone shows in the sheet and the guest gets the email.
 
 ## Phase 3 — Photo upload + QR (1–2 weekends)
 Learn: signed uploads, browser file APIs, retry queues, image resizing.
