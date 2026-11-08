@@ -1,0 +1,48 @@
+import type { Metadata } from "next";
+import { hasLocale, NextIntlClientProvider } from "next-intl";
+import { getTranslations } from "next-intl/server";
+import { notFound } from "next/navigation";
+import { locale as rootLocale } from "next/root-params";
+import { event } from "@/config/event";
+import { routing } from "@/i18n/routing";
+import { sans, serif } from "@/lib/fonts";
+import { Footer } from "./_components/Footer";
+import { Header } from "./_components/Header";
+import "../globals.css";
+
+// Pre-build /en, /pt and /es at deploy time.
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("Meta");
+  return {
+    title: t("title", event.couple),
+    description: t("description"),
+  };
+}
+
+const htmlLang = { en: "en", pt: "pt-BR", es: "es" } as const;
+
+export default async function LocaleLayout({
+  children,
+}: LayoutProps<"/[locale]">) {
+  const locale = await rootLocale();
+  if (!hasLocale(routing.locales, locale)) notFound();
+
+  return (
+    <html
+      lang={htmlLang[locale]}
+      className={`${serif.variable} ${sans.variable} antialiased`}
+    >
+      <body className="flex min-h-dvh flex-col">
+        <NextIntlClientProvider>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </NextIntlClientProvider>
+      </body>
+    </html>
+  );
+}

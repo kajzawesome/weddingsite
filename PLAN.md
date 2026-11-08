@@ -15,18 +15,19 @@ Decisions so far (2026-11-08):
 ---
 
 ## Phase 0 — Accounts and setup (KAJ, ~1 hour)
-- [ ] Clone the repo, add `CLAUDE.md`, `PLAN.md`, `README.md`
+- [x] Clone the repo, add `CLAUDE.md`, `PLAN.md`, `README.md`
 - [ ] Create free accounts: Vercel, Supabase, Cloudinary, Resend
 - [ ] Buy the domain (can wait until Phase 6)
 - [ ] Connect the GitHub repo to Vercel so every push deploys
 
 ## Phase 1 — Project + invite page (1 weekend)
 Learn: React components, Tailwind, App Router, i18n, deploys.
-- [ ] Scaffold: `npx create-next-app@latest` (TypeScript, Tailwind, App Router, ESLint)
-- [ ] Add next-intl with locales `en` (default), `pt`, `es`; routes `/[locale]/...`; language toggle in the header that remembers the choice
-- [ ] `config/event.ts` with placeholders: couple names, date (`null` = "Date coming soon"), ceremony + reception venues, dress code, RSVP deadline, hero media
-- [ ] Home page sections: hero (video with photo fallback), our story, schedule, travel and stay, FAQ, RSVP button
-- [ ] Fonts via `next/font`, colours as Tailwind theme tokens
+- [x] Scaffold: `npx create-next-app@latest` (TypeScript, Tailwind, App Router, ESLint)
+- [x] Add next-intl with locales `en` (default), `pt`, `es`; routes `/[locale]/...`; language toggle in the header that remembers the choice
+- [x] `config/event.ts` with placeholders: couple names, date (`null` = "Date coming soon"), ceremony + reception venues, dress code, RSVP deadline, hero media
+- [x] Home page sections: hero (video with photo fallback), our story, schedule, travel and stay, FAQ, RSVP button
+- [x] Fonts via `next/font`, colours as Tailwind theme tokens
+- [x] Registry page `/registry`: what we'd love (no prices), store buttons that say "Link coming soon" until the links are added in `config/registry.json`
 - [ ] Deployed on Vercel preview URL
 Done when: the page looks good on a phone in all three languages, with no hard-coded text.
 
@@ -38,6 +39,7 @@ Learn: Postgres, Supabase, server actions, form validation (zod).
 - [ ] Import guests from a CSV (script in `scripts/import-guests.ts`)
 - [ ] RSVP form at `/rsvp` (and pre-filled at `/i/[slug]/rsvp`), saved via a server action
 - [ ] Simple admin page `/admin` behind an admin password: RSVP list, counts, CSV export
+- [ ] Admin: edit the registry (items, store links) without touching code; move it from `config/registry.json` to a Supabase table
 Done when: a test guest can RSVP and it shows on `/admin`.
 
 ## Phase 3 — Photo upload + QR (1–2 weekends)

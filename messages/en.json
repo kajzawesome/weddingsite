@@ -1,0 +1,74 @@
+{
+  "Meta": {
+    "title": "{first} & {second}",
+    "description": "We're getting married. Here's everything you need to know."
+  },
+  "Nav": {
+    "home": "Home",
+    "registry": "Registry",
+    "rsvp": "RSVP",
+    "language": "Language"
+  },
+  "Hero": {
+    "kicker": "We're getting married",
+    "names": "{first} & {second}",
+    "dateSoon": "Date coming soon",
+    "scroll": "See the details"
+  },
+  "Story": {
+    "title": "Our story",
+    "body": "This is where our story goes: how we met, the first date, and the moment we knew. We'll fill it in soon."
+  },
+  "Schedule": {
+    "title": "The day",
+    "ceremony": "Ceremony",
+    "reception": "Reception",
+    "timeSoon": "Time to be announced",
+    "venueSoon": "Venue to be announced",
+    "map": "Open in Maps"
+  },
+  "Travel": {
+    "title": "Travel and stay",
+    "body": "Hotel suggestions, airports and how to get around will go here once the venue is set."
+  },
+  "Faq": {
+    "title": "Questions",
+    "dressCode": {
+      "q": "What should I wear?",
+      "soon": "We'll share the dress code soon."
+    },
+    "kids": {
+      "q": "Are kids welcome?",
+      "a": "We'll confirm this with the invitations."
+    },
+    "photos": {
+      "q": "Can I take photos?",
+      "a": "Yes please! On the day you'll be able to scan a QR code and add your photos to our shared album."
+    },
+    "gifts": {
+      "q": "Do you have a registry?",
+      "a": "Your being there is the best gift. If you'd like to give something, our registry has a few ideas.",
+      "link": "See the registry"
+    }
+  },
+  "Rsvp": {
+    "title": "Will you join us?",
+    "button": "RSVP",
+    "deadline": "Please reply by {date}",
+    "soonTitle": "RSVP opens soon",
+    "soonBody": "We'll let you know as soon as you can reply. Thank you for your patience!",
+    "back": "Back to home"
+  },
+  "Registry": {
+    "title": "Registry",
+    "intro": "Having you with us is what matters most. If you'd like to give a gift, here are a few things that would help us build our home together.",
+    "storesTitle": "Our registries",
+    "linkSoon": "Link coming soon",
+    "ideasTitle": "Ideas",
+    "fundsTitle": "Or contribute to a fund",
+    "fundsIntro": "Prefer to give toward something bigger? These are what we're saving for."
+  },
+  "Footer": {
+    "madeWith": "Made with love by {first} & {second}"
+  }
+}

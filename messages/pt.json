@@ -1,0 +1,74 @@
+{
+  "Meta": {
+    "title": "{first} & {second}",
+    "description": "Vamos nos casar! Aqui está tudo o que você precisa saber."
+  },
+  "Nav": {
+    "home": "Início",
+    "registry": "Presentes",
+    "rsvp": "Confirmar presença",
+    "language": "Idioma"
+  },
+  "Hero": {
+    "kicker": "Vamos nos casar",
+    "names": "{first} & {second}",
+    "dateSoon": "Data em breve",
+    "scroll": "Ver os detalhes"
+  },
+  "Story": {
+    "title": "Nossa história",
+    "body": "Aqui vai a nossa história: como nos conhecemos, o primeiro encontro e o momento em que soubemos. Em breve contamos tudo."
+  },
+  "Schedule": {
+    "title": "O grande dia",
+    "ceremony": "Cerimônia",
+    "reception": "Festa",
+    "timeSoon": "Horário a confirmar",
+    "venueSoon": "Local a confirmar",
+    "map": "Abrir no mapa"
+  },
+  "Travel": {
+    "title": "Viagem e hospedagem",
+    "body": "Sugestões de hotéis, aeroportos e como se locomover aparecerão aqui assim que o local estiver definido."
+  },
+  "Faq": {
+    "title": "Dúvidas",
+    "dressCode": {
+      "q": "O que devo vestir?",
+      "soon": "Em breve vamos compartilhar o traje."
+    },
+    "kids": {
+      "q": "Crianças são bem-vindas?",
+      "a": "Vamos confirmar isso junto com os convites."
+    },
+    "photos": {
+      "q": "Posso tirar fotos?",
+      "a": "Claro! No dia, você poderá escanear um QR code e adicionar suas fotos ao nosso álbum compartilhado."
+    },
+    "gifts": {
+      "q": "Vocês têm lista de presentes?",
+      "a": "Sua presença é o melhor presente. Se quiser nos presentear, nossa lista tem algumas ideias.",
+      "link": "Ver a lista"
+    }
+  },
+  "Rsvp": {
+    "title": "Você vem?",
+    "button": "Confirmar presença",
+    "deadline": "Por favor, responda até {date}",
+    "soonTitle": "A confirmação abre em breve",
+    "soonBody": "Avisaremos assim que você puder responder. Obrigado pela paciência!",
+    "back": "Voltar ao início"
+  },
+  "Registry": {
+    "title": "Lista de presentes",
+    "intro": "O mais importante é ter você conosco. Se quiser nos dar um presente, aqui estão algumas coisas que vão nos ajudar a montar nosso lar.",
+    "storesTitle": "Nossas listas",
+    "linkSoon": "Link em breve",
+    "ideasTitle": "Ideias",
+    "fundsTitle": "Ou contribua para um fundo",
+    "fundsIntro": "Prefere ajudar com algo maior? É para isso que estamos juntando."
+  },
+  "Footer": {
+    "madeWith": "Feito com amor por {first} & {second}"
+  }
+}

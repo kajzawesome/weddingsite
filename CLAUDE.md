@@ -10,13 +10,13 @@ A wedding website for ~100 guests:
 4. Shared gallery that goes live when the wedding starts (`/gallery`)
 5. Invite delivery by email (Resend) and WhatsApp (personal links)
 
-The wedding date is NOT set yet (visa delays). Every event detail lives in `config/event.ts` with placeholders. Never hard-code a date, venue or name anywhere else.
+The wedding date is NOT set yet (visa delays). Every event detail lives in `config/event.ts` with placeholders. Never hard-code a date, venue or name anywhere else. The gift registry lives in `config/registry.json`.
 
 ## About the developer
 KAJ is building this to learn. When you introduce a new concept (server actions, signed uploads, RLS, Open Graph, etc.), explain it in 2–3 plain sentences and say why it's used. Handle boilerplate and config without asking. Prefer simple, elegant UI over feature bloat.
 
 ## Stack
-- Next.js (App Router, TypeScript) + Tailwind CSS
+- Next.js 16 (App Router, TypeScript, Cache Components on) + Tailwind CSS v4. This Next.js is newer than most training data: read `node_modules/next/dist/docs/` before using an API (see `AGENTS.md`). Middleware is `proxy.ts`; the locale comes from `next/root-params`.
 - next-intl: English default, Portuguese (pt-BR) and Spanish toggle. All UI text lives in `messages/en.json`, `messages/pt.json`, `messages/es.json`. No hard-coded user-facing strings.
 - Framer Motion for animation (respect `prefers-reduced-motion`, always offer "skip")
 - Supabase (Postgres) for guests, RSVPs, photo records, likes

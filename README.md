@@ -21,6 +21,7 @@ Build steps: see PLAN.md. Rules for Claude Code: see CLAUDE.md.
 ## Features
 - [ ] Invite page (story, schedule, travel, FAQ)
 - [ ] RSVP with meal choice and plus-one
+- [x] Registry page with gift ideas and store links (edit `config/registry.json`)
 - [ ] Guest photo upload via QR (/share)
 - [ ] Shared gallery, approved photos only (/gallery)
 - [ ] Admin page to approve photos and see RSVPs
