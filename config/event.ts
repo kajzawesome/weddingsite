@@ -22,6 +22,10 @@ export const event = {
   // shared photo gallery opens at this moment.
   startsAt: null as string | null,
 
+  // When the reception ends, same format. Used for the "Add to Google
+  // Calendar" button in the RSVP email (null = 6 hours after startsAt).
+  endsAt: null as string | null,
+
   gallery: {
     // true = open the gallery now, filled with our engagement photos, so we
     // can try it out before the wedding. Set to false before the day: then it

@@ -5,7 +5,29 @@ import { getFormatter, getTranslations } from "next-intl/server";
 import { z } from "zod";
 import { event } from "@/config/event";
 import { routing } from "@/i18n/routing";
+import { readFile } from "node:fs/promises";
+import path from "node:path";
+import { googleCalendarUrl } from "@/lib/calendar";
+import { localize } from "@/lib/localized";
 import { renderEmail } from "@/lib/emailTemplate";
+
+// Small copies of our art and photo, made for email (in public/email).
+const EMAIL_IMAGES = { garland: "garland.png", couple: "couple.jpg", roses: "roses.png" };
+
+// The images as base64 text, so the Apps Script can attach them to the email.
+async function emailImages() {
+  try {
+    const entries = await Promise.all(
+      Object.entries(EMAIL_IMAGES).map(async ([name, file]) => {
+        const data = await readFile(path.join(process.cwd(), "public", "email", file));
+        return [name, { data: data.toString("base64"), type: file.endsWith(".png") ? "image/png" : "image/jpeg" }];
+      }),
+    );
+    return Object.fromEntries(entries) as Record<string, { data: string; type: string }>;
+  } catch {
+    return undefined; // no pictures is better than no email
+  }
+}
 
 // What the form sends back to the page after submitting.
 export type RsvpState =
@@ -84,9 +106,37 @@ export async function submitRsvp(_prev: RsvpState, formData: FormData): Promise<
   // The same email, designed (see lib/emailTemplate.ts). The plain text above
   // stays as the fallback for email apps that don't show HTML.
   const hero = await getTranslations({ locale, namespace: "Hero" });
+  const day = await getTranslations({ locale, namespace: "Schedule" });
   const format = await getFormatter({ locale });
   const site = process.env.SITE_URL?.replace(/\/$/, "");
-  const online = site?.startsWith("https://"); // email apps can't load images from localhost
+  const online = site?.startsWith("https://");
+
+  // Email apps can't load pictures from localhost. Once the site is online the
+  // email links to them; before that, they travel inside the email as
+  // attachments, which the HTML points to with "cid:name".
+  const images = online ? undefined : await emailImages();
+  const img = (name: keyof typeof EMAIL_IMAGES) =>
+    online ? `${site}/email/${EMAIL_IMAGES[name]}` : images ? `cid:${name}` : undefined;
+  const photo = img("couple");
+
+  const parts = [
+    { label: day("sealing"), note: day("sealingNote"), venue: event.sealing },
+    { label: day("ringCeremony"), note: day("ringNote"), venue: event.ringCeremony },
+    { label: day("reception"), note: day("receptionNote"), venue: event.reception },
+  ];
+  const where = event.reception.address ?? event.ringCeremony.address ?? event.sealing.address;
+  const start = event.startsAt ?? event.date;
+  const calendar = start
+    ? googleCalendarUrl({
+        title: t("email.calendarTitle", event.couple),
+        start,
+        end: event.endsAt,
+        location: where,
+        details: online ? `${site}/${locale}` : undefined,
+      })
+    : null;
+  const dressCode = event.dressCode ? localize(event.dressCode, locale) : null;
+
   const html = renderEmail({
     lang: locale,
     preview: attending ? t("email.yes", { count }) : t("email.no"),
@@ -104,10 +154,29 @@ export async function submitRsvp(_prev: RsvpState, formData: FormData): Promise<
       ...(attending ? [[t("email.guests"), String(count)] as [string, string]] : []),
       ...(message ? [[t("email.note"), message] as [string, string]] : []),
     ],
+    schedule: attending
+      ? {
+          title: day("title"),
+          items: parts.map(({ label, note, venue }) => ({
+            label,
+            note,
+            time: venue.time ?? day("timeSoon"),
+            place: venue.name ?? day("venueSoon"),
+            address: venue.address ?? undefined,
+            map: venue.mapUrl ? { label: day("map"), href: venue.mapUrl } : undefined,
+          })),
+          extra: dressCode ? [t("email.dressCode"), dressCode] : undefined,
+        }
+      : undefined,
+    buttons: [
+      ...(attending && calendar ? [{ label: t("email.calendar"), href: calendar }] : []),
+      ...(online ? [{ label: t("email.visit"), href: `${site}/${locale}`, outline: !!(attending && calendar) }] : []),
+    ],
     footnote: t("email.change"),
-    button: online ? { label: t("email.visit"), href: `${site}/${locale}` } : undefined,
     signoff: t("email.signoff", event.couple),
-    art: online ? `${site}/art/garland.png` : undefined,
+    art: img("garland"),
+    photo: photo ? { src: photo, alt: hero("photoAlt", event.couple) } : undefined,
+    footerArt: img("roses"),
   });
 
   try {
@@ -125,6 +194,7 @@ export async function submitRsvp(_prev: RsvpState, formData: FormData): Promise<
         locale,
         subject,
         html,
+        images,
         body,
       }),
       cache: "no-store",

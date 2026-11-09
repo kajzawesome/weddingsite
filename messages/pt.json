@@ -145,7 +145,10 @@
       "attending": "Presença",
       "guests": "Pessoas",
       "note": "Sua mensagem",
-      "visit": "Ver o site do casamento"
+      "visit": "Ver o site do casamento",
+      "calendar": "Adicionar ao Google Agenda",
+      "calendarTitle": "Casamento de {first} & {second}",
+      "dressCode": "O que vestir"
     }
   },
   "Registry": {

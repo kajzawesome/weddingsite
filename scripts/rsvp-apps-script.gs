@@ -15,7 +15,10 @@
  *       RSVP_SCRIPT_URL=<the Web app URL>
  *       RSVP_SECRET=<the same SECRET as below>
  *     (Add the same two values in Vercel > Project > Settings > Environment Variables.)
- *  6. If you edit this script later: Deploy > Manage deployments > edit > New version.
+ *  6. IMPORTANT, every time you paste a newer copy of this script:
+ *       Deploy > Manage deployments > pencil icon > Version: "New version" > Deploy.
+ *     Saving alone is not enough; the website keeps talking to the old version
+ *     (that's why an email can arrive as plain text after a change).
  *
  * "Anyone" access is safe here: without the SECRET the script refuses the request,
  * and the SECRET only lives on our server, never in the browser.
@@ -68,6 +71,7 @@ function doPost(e) {
       subject: data.subject,
       body: data.body, // plain-text fallback
       htmlBody: data.html || undefined, // the designed version, built by the website
+      inlineImages: inlineImages(data.images), // pictures the HTML shows with "cid:name"
       name: FROM_NAME,
     });
 
@@ -75,6 +79,18 @@ function doPost(e) {
   } catch (err) {
     return reply({ ok: false, error: String(err) });
   }
+}
+
+// Before the site is online, the website sends the email's pictures as base64
+// text: { garland: { data, type }, ... }. This turns them into attachments.
+function inlineImages(images) {
+  if (!images) return undefined;
+  const out = {};
+  Object.keys(images).forEach(function (name) {
+    const img = images[name];
+    out[name] = Utilities.newBlob(Utilities.base64Decode(img.data), img.type, name);
+  });
+  return out;
 }
 
 // Finds (or creates) the RSVP tab. If it's empty, adds the headers and a

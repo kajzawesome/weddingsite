@@ -145,7 +145,10 @@
       "attending": "Attending",
       "guests": "Guests",
       "note": "Your note",
-      "visit": "Visit our wedding website"
+      "visit": "Visit our wedding website",
+      "calendar": "Add to Google Calendar",
+      "calendarTitle": "{first} & {second}'s wedding",
+      "dressCode": "What to wear"
     }
   },
   "Registry": {

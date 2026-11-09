@@ -145,7 +145,10 @@
       "attending": "Asistencia",
       "guests": "Personas",
       "note": "Tu mensaje",
-      "visit": "Ver la página de la boda"
+      "visit": "Ver la página de la boda",
+      "calendar": "Añadir a Google Calendar",
+      "calendarTitle": "Boda de {first} y {second}",
+      "dressCode": "Qué ponerse"
     }
   },
   "Registry": {
