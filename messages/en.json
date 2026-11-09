@@ -139,7 +139,13 @@
       "yes": "{count, plural, one {Thank you for your RSVP! We've saved a spot for you.} other {Thank you for your RSVP! We've saved spots for # people.}} We can't wait to celebrate with you.",
       "no": "Thank you for letting us know. We'll miss you, and we're so grateful for your love and support.",
       "change": "Need to change something? Just reply to this email.",
-      "signoff": "With love,\n{first} & {second}"
+      "signoff": "With love,\n{first} & {second}",
+      "summary": "Your RSVP",
+      "name": "Name",
+      "attending": "Attending",
+      "guests": "Guests",
+      "note": "Your note",
+      "visit": "Visit our wedding website"
     }
   },
   "Registry": {

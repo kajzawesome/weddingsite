@@ -1,10 +1,11 @@
 "use server";
 
 import { hasLocale } from "next-intl";
-import { getTranslations } from "next-intl/server";
+import { getFormatter, getTranslations } from "next-intl/server";
 import { z } from "zod";
 import { event } from "@/config/event";
 import { routing } from "@/i18n/routing";
+import { renderEmail } from "@/lib/emailTemplate";
 
 // What the form sends back to the page after submitting.
 export type RsvpState =
@@ -80,6 +81,35 @@ export async function submitRsvp(_prev: RsvpState, formData: FormData): Promise<
     t("email.signoff", event.couple),
   ].join("\n");
 
+  // The same email, designed (see lib/emailTemplate.ts). The plain text above
+  // stays as the fallback for email apps that don't show HTML.
+  const hero = await getTranslations({ locale, namespace: "Hero" });
+  const format = await getFormatter({ locale });
+  const site = process.env.SITE_URL?.replace(/\/$/, "");
+  const online = site?.startsWith("https://"); // email apps can't load images from localhost
+  const html = renderEmail({
+    lang: locale,
+    preview: attending ? t("email.yes", { count }) : t("email.no"),
+    kicker: hero("kicker"),
+    ...event.couple,
+    dateLine: event.date
+      ? format.dateTime(new Date(event.date), { dateStyle: "long", timeZone: "UTC" })
+      : hero("dateSoon"),
+    greeting: t("email.greeting", { name: firstName }),
+    paragraphs: [attending ? t("email.yes", { count }) : t("email.no")],
+    summaryTitle: t("email.summary"),
+    summary: [
+      [t("email.name"), name],
+      [t("email.attending"), attending ? t("fields.yes") : t("fields.no")],
+      ...(attending ? [[t("email.guests"), String(count)] as [string, string]] : []),
+      ...(message ? [[t("email.note"), message] as [string, string]] : []),
+    ],
+    footnote: t("email.change"),
+    button: online ? { label: t("email.visit"), href: `${site}/${locale}` } : undefined,
+    signoff: t("email.signoff", event.couple),
+    art: online ? `${site}/art/garland.png` : undefined,
+  });
+
   try {
     const res = await fetch(url, {
       method: "POST",
@@ -94,12 +124,14 @@ export async function submitRsvp(_prev: RsvpState, formData: FormData): Promise<
         message: message ?? "",
         locale,
         subject,
+        html,
         body,
       }),
       cache: "no-store",
     });
-    const result = (await res.json().catch(() => null)) as { ok?: boolean } | null;
-    if (!res.ok || !result?.ok) throw new Error(`Apps Script replied ${res.status}`);
+    const result = (await res.json().catch(() => null)) as { ok?: boolean; error?: string } | null;
+    // "unauthorized" = RSVP_SECRET doesn't match SECRET in the script
+    if (!res.ok || !result?.ok) throw new Error(`Apps Script replied ${res.status}: ${result?.error ?? "not JSON"}`);
   } catch (err) {
     console.error("RSVP save failed", err);
     return { status: "error", message: t("errors.server") };

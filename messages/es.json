@@ -139,7 +139,13 @@
       "yes": "{count, plural, one {¡Gracias por confirmar! Te guardamos un lugar.} other {¡Gracias por confirmar! Guardamos lugares para # personas.}} Tenemos muchas ganas de celebrar contigo.",
       "no": "Gracias por avisarnos. Te vamos a extrañar, y agradecemos mucho tu cariño y apoyo.",
       "change": "¿Necesitas cambiar algo? Solo responde a este correo.",
-      "signoff": "Con cariño,\n{first} y {second}"
+      "signoff": "Con cariño,\n{first} y {second}",
+      "summary": "Tu confirmación",
+      "name": "Nombre",
+      "attending": "Asistencia",
+      "guests": "Personas",
+      "note": "Tu mensaje",
+      "visit": "Ver la página de la boda"
     }
   },
   "Registry": {

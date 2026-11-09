@@ -2,7 +2,7 @@
  * RSVP receiver: paste this into Google Apps Script (attached to your RSVP sheet).
  *
  * What it does: the website sends each RSVP here. This script adds it as a row
- * in the "RSVPs" tab and emails the guest their confirmation from your Gmail.
+ * in the "RSVP" tab and emails the guest their confirmation from your Gmail.
  *
  * Setup (about 10 minutes):
  *  1. Create a Google Sheet called "Wedding RSVPs". Share it with Tayna.
@@ -35,7 +35,7 @@
  */
 
 const SECRET = "change-me-to-a-long-random-string";
-const SHEET_NAME = "RSVPs";
+const SHEET_NAME = "RSVP"; // the tab name at the bottom of the sheet
 const FROM_NAME = "KAJ & Tayna";
 const NOTE_SHEET = "Thank-you note";
 // Columns in the RSVPs tab (1 = A)
@@ -66,7 +66,8 @@ function doPost(e) {
     MailApp.sendEmail({
       to: data.email,
       subject: data.subject,
-      body: data.body,
+      body: data.body, // plain-text fallback
+      htmlBody: data.html || undefined, // the designed version, built by the website
       name: FROM_NAME,
     });
 
@@ -76,12 +77,12 @@ function doPost(e) {
   }
 }
 
-// Creates the RSVPs tab with headers and a running total the first time.
+// Finds (or creates) the RSVP tab. If it's empty, adds the headers and a
+// running total, so it works whether you made the tab yourself or not.
 function getSheet() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
-  let sheet = ss.getSheetByName(SHEET_NAME);
-  if (!sheet) {
-    sheet = ss.insertSheet(SHEET_NAME);
+  const sheet = ss.getSheetByName(SHEET_NAME) || ss.insertSheet(SHEET_NAME);
+  if (sheet.getLastRow() === 0) {
     sheet.appendRow(["Time", "Name", "Email", "Attending", "Guests", "Message", "Language", "Thank-you sent"]);
     sheet.setFrozenRows(1);
     sheet.getRange("I1").setValue("Total guests coming");
@@ -195,7 +196,7 @@ function sendThankYouTest() {
   try {
     const note = getNotes().en;
     const me = Session.getActiveUser().getEmail();
-    MailApp.sendEmail({ to: me, subject: "[Test] " + note.subject, body: fillIn(note, "Ana"), name: FROM_NAME });
+    sendNote(me, "[Test] " + note.subject, fillIn(note, "Ana"));
     ui.alert("Sent a test to " + me + ".");
   } catch (err) {
     ui.alert(String(err.message || err));
@@ -251,7 +252,7 @@ function sendThankYous() {
     if (MailApp.getRemainingDailyQuota() < 1) break;
     const row = rows[r];
     const note = notes[String(row[COL.language - 1]).trim().toLowerCase()] || notes.en;
-    MailApp.sendEmail({ to: String(row[COL.email - 1]).trim(), subject: note.subject, body: fillIn(note, row[COL.name - 1]), name: FROM_NAME });
+    sendNote(String(row[COL.email - 1]).trim(), note.subject, fillIn(note, row[COL.name - 1]));
     sheet.getRange(r + 1, COL.thanked).setValue(new Date());
     sent++;
   }
@@ -262,4 +263,48 @@ function sendThankYous() {
       ? "Done! Sent " + sent + " thank-you emails."
       : "Sent " + sent + ". Gmail's daily limit was reached; run this again tomorrow to send the other " + left + ".",
   );
+}
+
+// ---------- Email design ----------
+// Same look as the website's RSVP email (lib/emailTemplate.ts): a white card
+// on cream, our names with a gold "&". Email apps need tables and inline styles.
+// Edit COUPLE if the names change.
+const COUPLE = { first: "KAJ", second: "Tayna" };
+
+function sendNote(to, subject, text) {
+  MailApp.sendEmail({ to: to, subject: subject, body: text, htmlBody: noteHtml(text), name: FROM_NAME });
+}
+
+function esc(text) {
+  return String(text).replace(/[&<>"']/g, function (c) {
+    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+  });
+}
+
+// Turns the plain note into the designed email: the first line ("Dear Ana,")
+// becomes the greeting, the last paragraph ("With love, ...") the signoff.
+function noteHtml(text) {
+  const serif = "'Cormorant Garamond', Georgia, 'Times New Roman', serif";
+  const sans = "Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif";
+  const paras = String(text).split(/\n\s*\n/).map(function (p) { return p.trim(); }).filter(String);
+  const greeting = paras.length > 2 ? paras.shift() : "";
+  const signoff = paras.length > 1 ? paras.pop() : "";
+  const cell = function (style, html) { return '<tr><td style="' + style + '">' + html + "</td></tr>"; };
+  const br = function (t) { return esc(t).replace(/\n/g, "<br>"); };
+
+  return [
+    '<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">',
+    '<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@400;600&display=swap" rel="stylesheet"></head>',
+    '<body style="margin:0;padding:0;background:#fbf8f5">',
+    '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#fbf8f5"><tr><td align="center" style="padding:32px 12px">',
+    '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#ffffff;border:1px solid #ece3dc;border-radius:28px">',
+    cell("padding:44px 40px 0;text-align:center;font:400 40px/1.15 " + serif + ";color:#2b2a33",
+      esc(COUPLE.first) + ' <span style="font-style:italic;color:#b8955a">&amp;</span> ' + esc(COUPLE.second)),
+    cell("padding:14px 40px 0;text-align:center;font:13px/1 " + sans + ";color:#b8955a;letter-spacing:6px",
+      "&#8212;&#8212;&#8212;&nbsp;&#9670;&nbsp;&#8212;&#8212;&#8212;"),
+    greeting ? cell("padding:36px 40px 0;font:500 24px/1.3 " + serif + ";color:#2b2a33", br(greeting)) : "",
+    paras.map(function (p) { return cell("padding:12px 40px 0;font:16px/1.65 " + sans + ";color:#2b2a33", br(p)); }).join(""),
+    signoff ? cell("padding:32px 40px 44px;font:400 22px/1.4 " + serif + ";color:#2b2a33", br(signoff)) : cell("height:44px", ""),
+    "</table></td></tr></table></body></html>",
+  ].join("");
 }
