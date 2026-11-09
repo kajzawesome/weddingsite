@@ -2,6 +2,8 @@
 
 Digital invite, RSVP, guest photo upload and a shared gallery.
 
+Live at https://www.casamentojacobs.com
+
 Build steps: see `PLAN.md`. Rules for Claude Code: see `CLAUDE.md`.
 
 ## Event details (edit in `config/event.ts`)
@@ -47,11 +49,11 @@ Next.js 16, Tailwind CSS v4, next-intl, Framer Motion, Vercel, Cloudinary (photo
 - **RSVP sheet:** follow the steps at the top of `scripts/rsvp-apps-script.gs`, then set `RSVP_SCRIPT_URL` and `RSVP_SECRET`. After pasting a newer copy of the script, always Deploy > Manage deployments > New version, or emails keep using the old one
 - **Email pictures:** small copies of the art and photo live in `public/email/`. Until `SITE_URL` is set to the live https address they're attached to each email; after that they're linked
 - **Photo uploads:** create a Cloudinary account, then set the three `CLOUDINARY` keys and `SHARE_CODE`
-- **QR code:** `node scripts/make-qr.mts <site-url> <code>` writes `print/share-qr.svg` and `.png`. Print only once the domain is final
-- **Vercel:** add the same keys under Project Settings > Environment Variables
+- **QR code:** `node scripts/make-qr.mts <site-url> <code>` writes `print/share-qr.svg` and `.png`. The domain is final, so use `https://www.casamentojacobs.com`
+- **Vercel:** add the same keys under Project Settings > Environment Variables, with `SITE_URL=https://www.casamentojacobs.com`. Redeploy after changing a key
 
 ## Launch checklist
-- [ ] Domain bought and connected
+- [x] Domain bought and connected (casamentojacobs.com)
 - [ ] Tested on iPhone and Android, in all three languages
 - [ ] Venue signal checked
 - [ ] Backup QR (Google Photos album) printed

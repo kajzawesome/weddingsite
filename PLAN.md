@@ -6,7 +6,7 @@ Each phase ends with something working you can show Tay.
 
 Decisions so far (2026-11-08):
 - Build it ourselves. Repo: https://github.com/kajzawesome/weddingsite
-- Domain: `JacobsSandeWedding.com` or `KAJandTayWedding.com` (undecided)
+- Domain: https://www.casamentojacobs.com (live on Vercel 2026-11-09; the bare domain redirects to www)
 - English first, PT/ES toggle (Tay's family is in Brazil)
 - ~100 guests
 - Gallery goes live when the wedding starts; password on the gallery only; 5-photo public preview; heart photos, then download all hearted as a zip
@@ -17,8 +17,8 @@ Decisions so far (2026-11-08):
 ## Phase 0 — Accounts and setup (KAJ, ~1 hour)
 - [x] Clone the repo, add `CLAUDE.md`, `PLAN.md`, `README.md`
 - [ ] Create free accounts: Vercel, Supabase, Cloudinary, Resend
-- [ ] Buy the domain (can wait until Phase 6)
-- [ ] Connect the GitHub repo to Vercel so every push deploys
+- [x] Buy the domain
+- [x] Connect the GitHub repo to Vercel so every push deploys
 
 ## Phase 1 — Project + invite page (1 weekend)
 Learn: React components, Tailwind, App Router, i18n, deploys.
@@ -29,7 +29,7 @@ Learn: React components, Tailwind, App Router, i18n, deploys.
 - [x] Fonts via `next/font`, colours as Tailwind theme tokens
 - [x] Registry page `/registry`: what we'd love (no prices), store buttons that say "Link coming soon" until the links are added in `config/registry.json`
 - [x] Placeholder `/gallery` and `/share` pages ("opens on the wedding day"), linked as "Photos" in the header
-- [ ] Deployed on Vercel preview URL
+- [x] Deployed on Vercel
 Done when: the page looks good on a phone in all three languages, with no hard-coded text.
 
 ## Phase 2 — RSVP (done differently than first planned)
@@ -52,7 +52,7 @@ Decision: Cloudinary only (no Supabase); photos are tagged/foldered there and li
 - [x] QR generator: `node scripts/make-qr.mts <site-url> <code>` → `print/share-qr.svg/png`
 - [x] Tested with a flaky fake Cloudinary: dropped requests retried, signatures valid, resumed after closing the page
 - [x] KAJ: create Cloudinary account, add the 4 env keys (`.env.example`), test from a real phone
-- [ ] Print QR cards only after the domain is final
+- [ ] Print QR cards (domain is final: `node scripts/make-qr.mts https://www.casamentojacobs.com <code>`)
 
 ## Phase 4 — Gallery (built 2026-11-09, in test mode with engagement photos)
 Learn: auth with cookies, image optimisation, zip downloads.
@@ -81,7 +81,8 @@ Learn: animation, transactional email, Open Graph link previews.
 Done when: you send yourself the email and a WhatsApp link, and both open the animation.
 
 ## Phase 6 — Launch (ongoing)
-- [ ] Buy and connect the domain on Vercel; set up Resend DNS (SPF/DKIM) so email lands in the inbox
+- [x] Buy and connect the domain on Vercel
+- [ ] Set up Resend DNS (SPF/DKIM) so email lands in the inbox
 - [ ] Friends test on iPhone + Android, in PT and ES
 - [ ] Check signal at the venue
 - [ ] Backup: a Google Photos album QR printed, just in case
