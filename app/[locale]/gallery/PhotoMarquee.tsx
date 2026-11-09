@@ -5,7 +5,7 @@ type Photo = { src: string; width: number; height: number; alt: string };
 // Photos gliding sideways in a continuous loop (like a film strip), done in CSS.
 // Each row holds the photos twice, so when the first copy slides out of view the
 // second is in exactly the same place and the loop has no visible jump.
-// Hover or touch pauses it; with "reduce motion" it becomes a swipeable row.
+// Holding a finger on it pauses it; with "reduce motion" it becomes a swipeable row.
 function Row({ photos, reverse }: { photos: Photo[]; reverse?: boolean }) {
   return (
     <div className="marquee overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">

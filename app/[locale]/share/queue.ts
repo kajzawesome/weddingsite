@@ -30,8 +30,12 @@ export async function loadItems(): Promise<QueueItem[]> {
 }
 
 export const CHUNK_SIZE = 6 * 1024 * 1024; // Cloudinary needs pieces of at least 5 MB
-export const MAX_VIDEO_BYTES = 100 * 1024 * 1024; // Cloudinary free plan limit
-export const MAX_VIDEO_SECONDS = 60;
+// Cloudinary's free plan refuses videos over 100 MB. Raise this if we upgrade the plan.
+export const MAX_VIDEO_BYTES = 100 * 1024 * 1024;
+// Above either of these we ask "are you sure?" first (big files are slow on venue
+// signal), but the guest can always choose to upload anyway.
+export const LARGE_VIDEO_BYTES = 40 * 1024 * 1024;
+export const LARGE_VIDEO_SECONDS = 60;
 const MAX_IMAGE_EDGE = 2500;
 
 /*

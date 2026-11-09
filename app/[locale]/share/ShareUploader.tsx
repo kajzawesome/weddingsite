@@ -1,13 +1,15 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { type ReactNode, useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { Link } from "@/i18n/navigation";
 import {
   CHUNK_SIZE,
+  LARGE_VIDEO_BYTES,
+  LARGE_VIDEO_SECONDS,
   loadItems,
   MAX_VIDEO_BYTES,
-  MAX_VIDEO_SECONDS,
   prepareImage,
   type QueueItem,
   removeItem,
@@ -25,9 +27,11 @@ type Row = {
   preview?: string;
   status: Status;
   progress: number;
-  message?: "tooLong" | "tooBig" | "failed";
+  message?: "tooBig" | "failed";
 };
 type Queued = QueueItem & { retryAt: number };
+type BigVideo = { id: string; file: File; mb: number; seconds: number };
+type BigVideos = { videos: BigVideo[]; answer: (keep: Set<string>) => void };
 
 const CODE_KEY = "share-code";
 const NAME_KEY = "share-name";
@@ -57,6 +61,7 @@ export function ShareUploader() {
   const [rows, setRows] = useState<Row[]>([]);
   const [online, setOnline] = useState(true);
   const [blocked, setBlocked] = useState<null | "wrongCode" | "notReady">(null);
+  const [bigVideos, setBigVideos] = useState<BigVideos | null>(null);
 
   // Refs hold the live queue so background uploads always see the latest values.
   const queue = useRef(new Map<string, Queued>());
@@ -155,7 +160,9 @@ export function ShareUploader() {
       if (!c || !n || b || !navigator.onLine) return;
       const now = Date.now();
       let nextRetry = Infinity;
-      for (const item of queue.current.values()) {
+      // Easiest first: whatever has the fewest bytes left to send.
+      const next = [...queue.current.values()].sort((a, b) => a.size - a.offset - (b.size - b.offset));
+      for (const item of next) {
         if (active.current.size >= PARALLEL) break;
         if (active.current.has(item.id)) continue;
         if (item.retryAt > now) {
@@ -235,23 +242,44 @@ export function ShareUploader() {
   }, [pending]);
 
   async function addFiles(files: FileList | null) {
-    if (!files) return;
-    for (const file of Array.from(files)) {
-      const id = crypto.randomUUID();
-      const kind = file.type.startsWith("video") ? "video" : "image";
-      setRows((all) => [...all, { id, kind, status: "waiting", progress: 0 }]);
+    if (!files?.length) return;
+    const picked = Array.from(files).map((file) => ({
+      file,
+      id: crypto.randomUUID(),
+      kind: file.type.startsWith("video") ? ("video" as const) : ("image" as const),
+    }));
 
-      if (kind === "video") {
-        if (file.size > MAX_VIDEO_BYTES) {
-          patch(id, { status: "rejected", message: "tooBig" });
-          continue;
-        }
-        if ((await videoSeconds(file)) > MAX_VIDEO_SECONDS + 0.5) {
-          patch(id, { status: "rejected", message: "tooLong" });
-          continue;
-        }
-      }
+    // Over Cloudinary's limit: show why on the tile instead of queueing it.
+    const tooBig = picked.filter((p) => p.kind === "video" && p.file.size > MAX_VIDEO_BYTES);
+    setRows((all) => [
+      ...all,
+      ...tooBig.map((p): Row => ({ id: p.id, kind: p.kind, status: "rejected", progress: 0, message: "tooBig" })),
+    ]);
+    let accepted = picked.filter((p) => !tooBig.includes(p));
 
+    // Long or heavy videos: one popup for all of them. The guest picks which to send.
+    const videos = await Promise.all(
+      accepted.filter((p) => p.kind === "video").map(async (p) => ({ ...p, seconds: await videoSeconds(p.file) })),
+    );
+    const big = videos.filter((v) => v.file.size > LARGE_VIDEO_BYTES || v.seconds > LARGE_VIDEO_SECONDS + 0.5);
+    if (big.length > 0) {
+      const keep = await new Promise<Set<string>>((resolve) =>
+        setBigVideos({
+          videos: big.map((v) => ({ id: v.id, file: v.file, mb: Math.round(v.file.size / (1024 * 1024)), seconds: v.seconds })),
+          answer: (ids) => {
+            setBigVideos(null);
+            resolve(ids);
+          },
+        }),
+      );
+      accepted = accepted.filter((p) => !big.some((b) => b.id === p.id) || keep.has(p.id));
+    }
+
+    // Smallest first: photos finish in seconds, big videos go last.
+    accepted.sort((a, b) => a.file.size - b.file.size);
+    setRows((all) => [...all, ...accepted.map((p): Row => ({ id: p.id, kind: p.kind, status: "waiting", progress: 0 }))]);
+
+    for (const { file, id, kind } of accepted) {
       const blob = kind === "image" ? await prepareImage(file) : file;
       const item: Queued = {
         id,
@@ -328,6 +356,7 @@ export function ShareUploader() {
 
   const done = rows.filter((r) => r.status === "done").length;
   const total = rows.filter((r) => r.status !== "rejected").length;
+  const overall = total ? rows.reduce((sum, r) => sum + (r.status === "rejected" ? 0 : r.progress), 0) / total : 0;
 
   // Step 3: pick and upload
   return (
@@ -373,8 +402,8 @@ export function ShareUploader() {
 
       {total > 0 && (
         <div className="text-center" aria-live="polite">
-          <p className="font-medium">{done === total ? t("allDone") : t("progress", { done, total })}</p>
-          {pending && <p className="mt-1 text-sm text-muted">{t("keepOpen")}</p>}
+          {/* While uploading, the count sits in the pinned banner at the bottom */}
+          {pending ? <p className="text-sm text-muted">{t("keepOpen")}</p> : <p className="font-medium">{t("allDone")}</p>}
         </div>
       )}
 
@@ -415,11 +444,106 @@ export function ShareUploader() {
         </ul>
       )}
 
-      <p className="text-center text-sm">
-        <Link href="/gallery" className="text-primary-dark underline underline-offset-4">
-          {t("galleryLink")}
-        </Link>
-      </p>
+      {bigVideos && (
+        <OnPage>
+          <BigVideoDialog {...bigVideos} />
+        </OnPage>
+      )}
+
+      {/* Pinned reminder while anything is still uploading */}
+      {pending && (
+        <OnPage>
+          <div className="fixed inset-x-0 bottom-0 z-40 px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]" role="status">
+            <div className="glass mx-auto max-w-xl rounded-3xl bg-white/80 px-5 py-3 text-center">
+              <p className="text-sm font-medium">{t("progress", { done, total })}</p>
+              <p className="text-xs text-muted">{t("keepOpenShort")}</p>
+              <span className="mt-2 block h-1.5 overflow-hidden rounded-full bg-primary/15">
+                <span className="block h-full bg-primary transition-[width]" style={{ width: `${overall * 100}%` }} />
+              </span>
+            </div>
+          </div>
+        </OnPage>
+      )}
+
+      {/* Secondary button: outlined, so "Choose photos" stays the main action */}
+      <Link
+        href="/gallery"
+        className="block w-full rounded-full border border-primary/40 bg-white/60 px-8 py-3.5 text-center font-medium text-primary-dark hover:bg-white/90"
+      >
+        {t("galleryLink")}
+      </Link>
+    </div>
+  );
+}
+
+// Draws its children straight onto the page body. Needed for anything pinned to
+// the screen: inside the frosted "glass" card, position: fixed would stick to the
+// card instead of the screen (a quirk of the blur effect).
+function OnPage({ children }: { children: ReactNode }) {
+  return createPortal(children, document.body);
+}
+
+// "These videos are quite large" popup: one list for every big video picked at
+// once, each ticked by default. Uploading is the main button: we'd rather have a
+// slow upload than miss the moment.
+function BigVideoDialog({ videos, answer }: BigVideos) {
+  const t = useTranslations("Share");
+  const [keep, setKeep] = useState(() => new Set(videos.map((v) => v.id)));
+  // Little previews of each video, so guests know which is which (file names are like IMG_1234).
+  const [urls] = useState(() => videos.map((v) => URL.createObjectURL(v.file)));
+  useEffect(() => () => urls.forEach((url) => URL.revokeObjectURL(url)), [urls]);
+
+  const length = (s: number) => `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, "0")}`;
+  const flip = (id: string) =>
+    setKeep((old) => {
+      const next = new Set(old);
+      if (!next.delete(id)) next.add(id);
+      return next;
+    });
+
+  return (
+    <div className="fixed inset-0 z-[100] grid place-items-center bg-ink/40 px-4">
+      <div
+        role="alertdialog"
+        aria-modal="true"
+        aria-labelledby="big-title"
+        className="glass flex max-h-[85dvh] w-full max-w-sm flex-col rounded-[2rem] bg-white/85 p-6 text-center"
+      >
+        <h2 id="big-title" className="font-serif text-3xl">{t("big.title", { count: videos.length })}</h2>
+        <p className="mt-3 leading-relaxed text-muted">{t("big.body", { count: videos.length })}</p>
+
+        <ul className="mt-4 min-h-0 space-y-2 overflow-y-auto text-left">
+          {videos.map((v, i) => (
+            <li key={v.id}>
+              <label className="flex cursor-pointer items-center gap-3 rounded-2xl bg-white/70 p-2 pr-3">
+                <video src={`${urls[i]}#t=0.1`} muted playsInline preload="metadata" className="size-14 shrink-0 rounded-xl bg-ink/10 object-cover" />
+                <span className="flex-1 text-sm tabular-nums">
+                  {v.seconds > 0 ? t("big.factsLength", { size: v.mb, length: length(v.seconds) }) : t("big.facts", { size: v.mb })}
+                </span>
+                <input
+                  type="checkbox"
+                  checked={keep.has(v.id)}
+                  onChange={() => flip(v.id)}
+                  aria-label={t("big.include")}
+                  className="size-5 accent-primary"
+                />
+              </label>
+            </li>
+          ))}
+        </ul>
+
+        <button
+          type="button"
+          autoFocus
+          onClick={() => answer(keep)}
+          className="mt-5 w-full rounded-full bg-primary px-8 py-3.5 font-medium text-paper ring-1 ring-gold/40 hover:bg-primary-dark"
+        >
+          {t("big.upload", { count: keep.size })}
+        </button>
+        <button type="button" onClick={() => answer(new Set())} className="mt-3 text-sm text-muted underline underline-offset-4">
+          {t("big.skip", { count: videos.length })}
+        </button>
+      </div>
     </div>
   );
 }

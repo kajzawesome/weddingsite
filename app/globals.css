@@ -128,8 +128,7 @@ body {
   animation-direction: reverse;
 }
 
-/* Pause while someone is looking (mouse over it, or a finger on it). */
-.marquee:hover .marquee-track,
+/* Pause while a finger is holding it (it keeps moving under the mouse). */
 .marquee:active .marquee-track {
   animation-play-state: paused;
 }

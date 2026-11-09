@@ -10,7 +10,7 @@ Decisions so far (2026-11-08):
 - English first, PT/ES toggle (Tay's family is in Brazil)
 - ~100 guests
 - Gallery goes live when the wedding starts; password on the gallery only; 5-photo public preview; heart photos, then download all hearted as a zip
-- Open: during the wedding, do photos auto-publish (with a one-tap hide) or does a trusted friend approve them?
+- Decided (2026-11-09): photos auto-publish during the wedding; an admin can hide any with one tap
 
 ---
 
@@ -53,16 +53,21 @@ Decision: Cloudinary only (no Supabase); photos are tagged/foldered there and li
 - [ ] KAJ: create Cloudinary account, add the 4 env keys (`.env.example`), test from a real phone
 - [ ] Print QR cards only after the domain is final
 
-## Phase 4 — Gallery (1 weekend)
+## Phase 4 — Gallery (built 2026-11-09, in test mode with engagement photos)
 Learn: auth with cookies, image optimisation, zip downloads.
-- [ ] `gallery_opens_at` in `config/event.ts` (= start of the wedding)
-- [ ] Before it opens: "Gallery opens on the day" page with a countdown
-- [ ] Public `/gallery`: 5 preview photos + "Enter the guest code to see all"
-- [ ] Code checked on the server, stored in an httpOnly cookie
-- [ ] Full gallery: masonry grid, lightbox, videos, newest first, live refresh during the wedding
-- [ ] Photo prompts strip ("A photo with the grandparents", "The dance floor from above", "Your table's best selfie") to nudge new angles
-- [ ] Heart button on each photo (`likes` table or localStorage per device), "My hearts" filter, "Download all hearted" as a zip
-- [ ] Admin: one-tap hide/unhide, "download everything" backup
+Decisions: photos auto-publish, an admin can hide any with one tap; hearts are saved on each phone (no database).
+- [x] `startsAt` in `config/event.ts` (= start of the wedding) opens the gallery; `gallery.demo` fills it with engagement photos for testing
+- [x] Before it opens: countdown (shared with the home page hero) + engagement photos + how to share
+- [x] Public `/gallery`: 5 newest photos + "Enter the code to see all" (`GALLERY_CODE`, falls back to `SHARE_CODE`)
+- [x] Code checked on the server (rate-limited), stored in an httpOnly cookie
+- [x] Full gallery: masonry grid, full-screen viewer (swipe, arrows, download), videos, newest first, checks for new photos every 30 s
+- [x] Photo prompts strip ("A photo with the grandparents", "The dance floor from above", "Your table's best selfie") to nudge new angles
+- [x] Heart button on each photo (localStorage per device), "My hearts" filter, "Download all hearted" as a zip (built in the browser)
+- [x] Admin `/gallery/admin` (`ADMIN_CODE`): one-tap hide/unhide, "download everything" backup zips from Cloudinary
+- [x] Upload page: big videos (over 40 MB or 60 s) get one "quite large, consider trimming" popup for the whole batch, upload anyway is the default; smallest files upload first; pinned "keep this page open" banner
+- [ ] KAJ: add `GALLERY_CODE` and `ADMIN_CODE` to `.env.local` and Vercel
+- [ ] With Cloudinary connected: upload a few test photos/videos from a phone, check they show, hide one, try both backup zips
+- [ ] Before the day: set `date` and `startsAt`, then `gallery.demo: false`
 Done when: a guest with the code can heart 10 photos and download them as one zip.
 
 ## Phase 5 — Envelope invite + sending (1 weekend)
@@ -80,6 +85,7 @@ Done when: you send yourself the email and a WhatsApp link, and both open the an
 - [ ] Check signal at the venue
 - [ ] Backup: a Google Photos album QR printed, just in case
 - [ ] After the wedding: download a full backup to Drive + a hard drive
+- [ ] After the wedding: thank-you emails from the RSVP sheet (Wedding menu > Set up thank-you note, edit it, send a test, then send; built into `scripts/rsvp-apps-script.gs`)
 
 ---
 

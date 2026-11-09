@@ -16,6 +16,19 @@ export const event = {
   // ISO date, e.g. "2027-06-12". null = "Date coming soon".
   date: null as string | null,
 
+  // When the day begins, with the time and Utah's UTC offset, e.g.
+  // "2027-06-12T10:00:00-06:00" (-06:00 in summer, -07:00 in winter).
+  // The countdowns count to this (or to the date if this is null), and the
+  // shared photo gallery opens at this moment.
+  startsAt: null as string | null,
+
+  gallery: {
+    // true = open the gallery now, filled with our engagement photos, so we
+    // can try it out before the wedding. Set to false before the day: then it
+    // opens at startsAt and shows the guests' uploads from Cloudinary.
+    demo: false,
+  },
+
   // Planned: sealing at the Provo City Center Temple, then a short ring
   // ceremony right before the reception. All in Provo, Utah.
   sealing: {

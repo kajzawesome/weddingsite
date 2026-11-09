@@ -14,10 +14,16 @@
     "kicker": "O casamento de",
     "dateSoon": "Data em breve",
     "photoAlt": "{first} e {second}",
-    "daysToGo": "{count, plural, one {Falta # dia} other {Faltam # dias}}",
-    "today": "Chegou o grande dia!",
     "rsvp": "Confirmar presença",
     "skip": "Pular"
+  },
+  "Countdown": {
+    "label": "Contagem regressiva para o casamento",
+    "days": "{count, plural, one {dia} other {dias}}",
+    "hours": "{count, plural, one {hora} other {horas}}",
+    "minutes": "{count, plural, one {minuto} other {minutos}}",
+    "seconds": "{count, plural, one {segundo} other {segundos}}",
+    "today": "Chegou o grande dia!"
   },
   "Story": {
     "title": "Nossa história",
@@ -108,8 +114,8 @@
       "email": "E-mail",
       "emailHint": "Vamos enviar a confirmação para este e-mail.",
       "attending": "Você vai?",
-      "yes": "Com alegria, eu vou",
-      "no": "Infelizmente, não poderei ir",
+      "yes": "Sim, eu vou",
+      "no": "Infelizmente não poderei ir",
       "guests": "Quantas pessoas vêm, contando com você?",
       "guestOption": "{count, plural, one {Só eu} =2 {2 (eu + um acompanhante)} other {# pessoas}}",
       "message": "Uma mensagem para nós",
@@ -185,7 +191,52 @@
       "laugh": "Alguém no meio de uma risada",
       "details": "Os detalhes: flores, alianças, bolo"
     },
-    "share": "Ir para o envio de fotos"
+    "share": "Ir para o envio de fotos",
+    "countdownTitle": "Até o grande dia",
+    "openIntro": "Todas as fotos e vídeos do nosso dia, compartilhados pelas pessoas que amamos. Toque no coração das suas favoritas para guardá-las.",
+    "previewTitle": "Veja todas",
+    "previewBody": "{count, plural, =0 {As fotos aparecem aqui conforme os convidados compartilham.} one {Até agora há # foto.} other {Até agora há # fotos.}} Digite o código do cartão da sua mesa para ver tudo.",
+    "codeLabel": "Código do álbum",
+    "unlock": "Abrir o álbum",
+    "errors": {
+      "wrong": "Esse código não funcionou. Ele está no cartão da sua mesa.",
+      "slow": "Muitas tentativas. Espere um minuto e tente de novo.",
+      "off": "O álbum ainda não está pronto. Volte daqui a pouco."
+    },
+    "demo": "Modo de teste: mostrando as fotos do nosso noivado. No dia do casamento, as fotos dos convidados aparecem aqui.",
+    "all": "Todas ({count})",
+    "hearts": "Meus corações ({count})",
+    "downloadHearts": "{count, plural, one {Baixar # foto} other {Baixar todas as #}} (zip)",
+    "preparing": "Preparando {done} de {total}…",
+    "downloadFailed": "O download não terminou. Verifique o sinal e tente de novo.",
+    "emptyAll": "Ainda não há fotos. Seja o primeiro a compartilhar!",
+    "emptyHearts": "Toque no coração de qualquer foto para guardá-la aqui e depois baixe todas de uma vez.",
+    "liveNote": "As fotos novas aparecem aqui sozinhas.",
+    "heart": "Adicionar aos meus corações",
+    "unheart": "Remover dos meus corações",
+    "photoBy": "Foto de {name}",
+    "videoBy": "Vídeo de {name}",
+    "counter": "{index} de {total}",
+    "close": "Fechar",
+    "previous": "Anterior",
+    "next": "Próxima",
+    "download": "Baixar",
+    "admin": {
+      "title": "Administração do álbum",
+      "intro": "Digite o código de administração. Depois de entrar, cada foto do álbum ganha um botão Ocultar.",
+      "notSetUp": "Adicione ADMIN_CODE às configurações do site para usar esta página.",
+      "codeLabel": "Código de administração",
+      "signIn": "Entrar",
+      "signedIn": "Você entrou neste celular. No álbum, toque em Ocultar em qualquer foto para tirá-la para todos. As fotos ocultas continuam visíveis para você, mais claras, para poder trazê-las de volta.",
+      "toGallery": "Ir para o álbum",
+      "hide": "Ocultar",
+      "unhide": "Mostrar de novo",
+      "backupTitle": "Backup",
+      "backupPhotos": "Baixar todas as fotos (zip)",
+      "backupVideos": "Baixar todos os vídeos (zip)",
+      "backupHint": "O Cloudinary monta o zip, o que pode levar um minuto num álbum grande.",
+      "backupDemo": "O backup funciona quando o Cloudinary estiver conectado e o modo de teste desligado."
+    }
   },
   "Share": {
     "title": "Compartilhe suas fotos",
@@ -199,7 +250,7 @@
     "hello": "Oi, {name}!",
     "notYou": "Não é você?",
     "pick": "Escolher fotos e vídeos",
-    "pickHint": "Escolha quantas quiser. Vídeos de até 60 segundos.",
+    "pickHint": "Escolha quantas quiser, fotos e vídeos.",
     "keepOpen": "Deixe esta página aberta enquanto enviam. Se o sinal cair, o envio termina sozinho quando a conexão voltar.",
     "offline": "Você está sem internet. Suas fotos estão salvas no celular e serão enviadas quando o sinal voltar.",
     "progress": "{done} de {total} enviadas",
@@ -213,11 +264,20 @@
       "done": "Enviada"
     },
     "errors": {
-      "tooLong": "Mais de 60 segundos",
-      "tooBig": "Grande demais (máx. 100 MB)",
+      "tooBig": "Mais de 100 MB. Corte e tente de novo",
       "failed": "Não foi possível enviar"
     },
-    "galleryLink": "Ver a página de fotos"
+    "galleryLink": "Ver o álbum",
+    "keepOpenShort": "Mantenha esta página aberta até terminar.",
+    "big": {
+      "title": "{count, plural, one {Este vídeo é bem grande} other {Estes vídeos são bem grandes}}",
+      "body": "{count, plural, one {Vídeos grandes podem demorar com o sinal do local. Você pode cortá-lo na melhor parte no app Fotos antes, mas se preferir mandar inteiro, pode mandar: não queremos perder nada.} other {Vídeos grandes podem demorar com o sinal do local. Você pode cortá-los nas melhores partes no app Fotos antes, ou desmarcar os que preferir pular. Mas adoraríamos receber todos!}}",
+      "facts": "{size} MB",
+      "factsLength": "{size} MB · {length}",
+      "include": "Enviar este vídeo",
+      "upload": "{count, plural, =0 {Continuar} one {Enviar mesmo assim} other {Enviar # vídeos}}",
+      "skip": "{count, plural, one {Não enviar} other {Não enviar nenhum destes}}"
+    }
   },
   "Footer": {
     "madeWith": "Feito com amor por {first} & {second}"

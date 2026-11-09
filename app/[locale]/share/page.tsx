@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function SharePage() {
   const t = await getTranslations("Share");
   return (
-    <div className="mx-auto max-w-xl px-4 pt-24 pb-14">
+    <div className="mx-auto max-w-xl px-4 pt-24 pb-36">
       <div className="text-center">
         <Garland className="mb-2" />
         <h1 className="font-serif text-5xl">{t("title")}</h1>

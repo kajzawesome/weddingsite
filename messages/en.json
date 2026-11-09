@@ -14,10 +14,16 @@
     "kicker": "The wedding of",
     "dateSoon": "Date coming soon",
     "photoAlt": "{first} and {second}",
-    "daysToGo": "{count, plural, one {# day to go} other {# days to go}}",
-    "today": "Today's the day!",
     "rsvp": "RSVP",
     "skip": "Skip"
+  },
+  "Countdown": {
+    "label": "Countdown to the wedding",
+    "days": "{count, plural, one {day} other {days}}",
+    "hours": "{count, plural, one {hour} other {hours}}",
+    "minutes": "{count, plural, one {minute} other {minutes}}",
+    "seconds": "{count, plural, one {second} other {seconds}}",
+    "today": "Today's the day!"
   },
   "Story": {
     "title": "Our story",
@@ -108,8 +114,8 @@
       "email": "Email",
       "emailHint": "We'll send your confirmation here.",
       "attending": "Will you be there?",
-      "yes": "Joyfully accepts",
-      "no": "Regretfully declines",
+      "yes": "Yes, I'll be there",
+      "no": "Sorry, I can't make it",
       "guests": "How many are coming, including you?",
       "guestOption": "{count, plural, one {Just me} =2 {2 (me + a plus-one)} other {# people}}",
       "message": "A note for us",
@@ -185,7 +191,52 @@
       "laugh": "Someone mid-laugh",
       "details": "The little details: flowers, rings, cake"
     },
-    "share": "Go to photo upload"
+    "share": "Go to photo upload",
+    "countdownTitle": "Until the big day",
+    "openIntro": "Every photo and video from our day, shared by the people we love. Tap the heart on your favourites to save them.",
+    "previewTitle": "See them all",
+    "previewBody": "{count, plural, =0 {Photos will appear here as guests share them.} one {There's # photo so far.} other {There are # photos so far.}} Enter the code from the card on your table to see everything.",
+    "codeLabel": "Gallery code",
+    "unlock": "Open the album",
+    "errors": {
+      "wrong": "That code didn't work. It's on the card on your table.",
+      "slow": "Too many tries. Please wait a minute and try again.",
+      "off": "The album isn't ready yet. Please check back soon."
+    },
+    "demo": "Test mode: showing our engagement photos. Guests' photos replace these on the wedding day.",
+    "all": "All ({count})",
+    "hearts": "My hearts ({count})",
+    "downloadHearts": "{count, plural, one {Download # photo} other {Download all #}} (zip)",
+    "preparing": "Preparing {done} of {total}…",
+    "downloadFailed": "The download didn't finish. Please check your signal and try again.",
+    "emptyAll": "No photos yet. Be the first to share one!",
+    "emptyHearts": "Tap the heart on any photo to save it here, then download them all at once.",
+    "liveNote": "New photos appear here on their own.",
+    "heart": "Add to my hearts",
+    "unheart": "Remove from my hearts",
+    "photoBy": "Photo by {name}",
+    "videoBy": "Video by {name}",
+    "counter": "{index} of {total}",
+    "close": "Close",
+    "previous": "Previous",
+    "next": "Next",
+    "download": "Download",
+    "admin": {
+      "title": "Album admin",
+      "intro": "Enter the admin code. Once you're signed in, every photo in the album gets a Hide button.",
+      "notSetUp": "Add ADMIN_CODE to the site's settings to use this page.",
+      "codeLabel": "Admin code",
+      "signIn": "Sign in",
+      "signedIn": "You're signed in on this phone. In the album, tap Hide on any photo to remove it for everyone. Hidden photos stay visible to you, faded, so you can bring them back.",
+      "toGallery": "Go to the album",
+      "hide": "Hide",
+      "unhide": "Show again",
+      "backupTitle": "Backup",
+      "backupPhotos": "Download all photos (zip)",
+      "backupVideos": "Download all videos (zip)",
+      "backupHint": "Cloudinary builds the zip, which can take a minute for a big album.",
+      "backupDemo": "Backups work once Cloudinary is connected and test mode is off."
+    }
   },
   "Share": {
     "title": "Share your photos",
@@ -199,7 +250,7 @@
     "hello": "Hi {name}!",
     "notYou": "Not you?",
     "pick": "Choose photos and videos",
-    "pickHint": "Pick as many as you like. Videos up to 60 seconds.",
+    "pickHint": "Pick as many as you like, photos and videos.",
     "keepOpen": "Keep this page open while they upload. If you lose signal, they'll finish on their own when you're back online.",
     "offline": "You're offline. Your photos are saved on your phone and will upload when the signal comes back.",
     "progress": "{done} of {total} uploaded",
@@ -213,11 +264,20 @@
       "done": "Uploaded"
     },
     "errors": {
-      "tooLong": "Over 60 seconds",
-      "tooBig": "Too large (max 100 MB)",
+      "tooBig": "Over 100 MB. Trim it and try again",
       "failed": "Couldn't upload"
     },
-    "galleryLink": "See the photos page"
+    "galleryLink": "See the album",
+    "keepOpenShort": "Please keep this page open until it's done.",
+    "big": {
+      "title": "{count, plural, one {This video is quite large} other {These videos are quite large}}",
+      "body": "{count, plural, one {Big videos can take a while on the venue's signal. You could trim it to the best part in your Photos app first, but if you'd rather send it all, go ahead: we don't want to miss a thing.} other {Big videos can take a while on the venue's signal. You could trim them to the best parts in your Photos app first, or untick any you'd rather skip. We'd love them all, though!}}",
+      "facts": "{size} MB",
+      "factsLength": "{size} MB · {length}",
+      "include": "Upload this video",
+      "upload": "{count, plural, =0 {Continue} one {Upload anyway} other {Upload # videos}}",
+      "skip": "{count, plural, one {Don't upload it} other {Don't upload any of these}}"
+    }
   },
   "Footer": {
     "madeWith": "Made with love by {first} & {second}"

@@ -8,7 +8,7 @@ type Slide = { name: string; blurb: string; image: string | null; dotLabel: stri
 const SECONDS_PER_SLIDE = 5;
 
 // One fund at a time, fading to the next every few seconds.
-// Pauses while a guest hovers, focuses or touches it, and doesn't auto-rotate
+// Keeps moving under the mouse; pauses while a finger is on it or a keyboard user is in it, and doesn't auto-rotate
 // for guests who ask their phone for reduced motion. Swipe or tap the dots to move.
 export function FundCarousel({
   slides,
@@ -39,9 +39,8 @@ export function FundCarousel({
     <section
       aria-roledescription="carousel"
       aria-label={label}
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocus={() => setPaused(true)}
+      // Pause for keyboard users only (a mouse click also focuses, but shouldn't freeze it)
+      onFocus={(e) => e.target.matches(":focus-visible") && setPaused(true)}
       onBlur={() => setPaused(false)}
       onTouchStart={(e) => {
         setPaused(true);

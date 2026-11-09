@@ -1,8 +1,8 @@
 import { getFormatter, getTranslations } from "next-intl/server";
 import { event } from "@/config/event";
 import { Link } from "@/i18n/navigation";
+import { Countdown } from "../_components/Countdown";
 import { Flourish } from "../_components/Flourish";
-import { DaysToGo } from "./DaysToGo";
 import { HeroPhoto } from "./HeroPhoto";
 
 // Full-screen photo with our names on top. It's "sticky", so it stays pinned
@@ -54,7 +54,7 @@ export async function Hero() {
         </h1>
         <Flourish className="my-5" />
         <p className="font-serif text-2xl">{date}</p>
-        {event.date && <DaysToGo date={event.date} />}
+        {event.date && <Countdown to={event.startsAt ?? event.date} className="mt-4" />}
         <Link
           href="/rsvp"
           className="glass mt-7 rounded-full px-10 py-3 font-medium text-ink [text-shadow:none] hover:bg-white/80"

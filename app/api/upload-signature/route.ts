@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { clientIp, rateLimiter } from "@/lib/rateLimit";
 import { cloudinaryConfig, contextValue, sign, UPLOAD_FOLDER, UPLOAD_TAG } from "@/lib/cloudinary";
 
 // A guest's phone asks for permission to upload one file. We check the event
@@ -9,16 +10,8 @@ const body = z.object({
   name: z.string().trim().min(1).max(60),
 });
 
-// Simple per-device limit: at most 40 signatures a minute from one IP address.
-// (Kept in memory, so it's a speed bump rather than a wall, which is fine here.)
-const hits = new Map<string, number[]>();
-function tooMany(ip: string) {
-  const now = Date.now();
-  const recent = (hits.get(ip) ?? []).filter((t) => now - t < 60_000);
-  recent.push(now);
-  hits.set(ip, recent);
-  return recent.length > 40;
-}
+// At most 40 signatures a minute from one IP address.
+const tooMany = rateLimiter(40);
 
 export async function POST(request: Request) {
   const config = cloudinaryConfig();
@@ -27,8 +20,7 @@ export async function POST(request: Request) {
     return Response.json({ error: "not-configured" }, { status: 503 });
   }
 
-  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "local";
-  if (tooMany(ip)) return Response.json({ error: "slow-down" }, { status: 429 });
+  if (tooMany(clientIp(request.headers))) return Response.json({ error: "slow-down" }, { status: 429 });
 
   const parsed = body.safeParse(await request.json().catch(() => null));
   if (!parsed.success) return Response.json({ error: "bad-request" }, { status: 400 });

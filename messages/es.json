@@ -14,10 +14,16 @@
     "kicker": "La boda de",
     "dateSoon": "Fecha próximamente",
     "photoAlt": "{first} y {second}",
-    "daysToGo": "{count, plural, one {Falta # día} other {Faltan # días}}",
-    "today": "¡Hoy es el gran día!",
     "rsvp": "Confirmar asistencia",
     "skip": "Saltar"
+  },
+  "Countdown": {
+    "label": "Cuenta regresiva para la boda",
+    "days": "{count, plural, one {día} other {días}}",
+    "hours": "{count, plural, one {hora} other {horas}}",
+    "minutes": "{count, plural, one {minuto} other {minutos}}",
+    "seconds": "{count, plural, one {segundo} other {segundos}}",
+    "today": "¡Hoy es el gran día!"
   },
   "Story": {
     "title": "Nuestra historia",
@@ -108,8 +114,8 @@
       "email": "Correo electrónico",
       "emailHint": "Te enviaremos la confirmación aquí.",
       "attending": "¿Vendrás?",
-      "yes": "Con gusto asistiré",
-      "no": "Lamentablemente no podré ir",
+      "yes": "Sí, ahí estaré",
+      "no": "Lo siento, no podré ir",
       "guests": "¿Cuántos vienen, contándote a ti?",
       "guestOption": "{count, plural, one {Solo yo} =2 {2 (yo + un acompañante)} other {# personas}}",
       "message": "Un mensaje para nosotros",
@@ -185,7 +191,52 @@
       "laugh": "Alguien a mitad de una carcajada",
       "details": "Los detalles: flores, anillos, pastel"
     },
-    "share": "Ir a subir fotos"
+    "share": "Ir a subir fotos",
+    "countdownTitle": "Hasta el gran día",
+    "openIntro": "Todas las fotos y videos de nuestro día, compartidos por las personas que queremos. Toca el corazón de tus favoritas para guardarlas.",
+    "previewTitle": "Velas todas",
+    "previewBody": "{count, plural, =0 {Las fotos aparecen aquí a medida que los invitados las comparten.} one {Hasta ahora hay # foto.} other {Hasta ahora hay # fotos.}} Escribe el código de la tarjeta de tu mesa para verlo todo.",
+    "codeLabel": "Código del álbum",
+    "unlock": "Abrir el álbum",
+    "errors": {
+      "wrong": "Ese código no funcionó. Está en la tarjeta de tu mesa.",
+      "slow": "Demasiados intentos. Espera un minuto y vuelve a intentarlo.",
+      "off": "El álbum aún no está listo. Vuelve en un rato."
+    },
+    "demo": "Modo de prueba: mostrando las fotos de nuestro compromiso. El día de la boda, aquí aparecerán las fotos de los invitados.",
+    "all": "Todas ({count})",
+    "hearts": "Mis corazones ({count})",
+    "downloadHearts": "{count, plural, one {Descargar # foto} other {Descargar las #}} (zip)",
+    "preparing": "Preparando {done} de {total}…",
+    "downloadFailed": "La descarga no terminó. Revisa tu señal y vuelve a intentarlo.",
+    "emptyAll": "Aún no hay fotos. ¡Sé el primero en compartir una!",
+    "emptyHearts": "Toca el corazón de cualquier foto para guardarla aquí y luego descárgalas todas a la vez.",
+    "liveNote": "Las fotos nuevas aparecen aquí solas.",
+    "heart": "Añadir a mis corazones",
+    "unheart": "Quitar de mis corazones",
+    "photoBy": "Foto de {name}",
+    "videoBy": "Video de {name}",
+    "counter": "{index} de {total}",
+    "close": "Cerrar",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "download": "Descargar",
+    "admin": {
+      "title": "Administrar el álbum",
+      "intro": "Escribe el código de administración. Al entrar, cada foto del álbum tendrá un botón Ocultar.",
+      "notSetUp": "Añade ADMIN_CODE a la configuración del sitio para usar esta página.",
+      "codeLabel": "Código de administración",
+      "signIn": "Entrar",
+      "signedIn": "Has entrado en este teléfono. En el álbum, toca Ocultar en cualquier foto para quitarla para todos. Las fotos ocultas siguen visibles para ti, más claras, para poder recuperarlas.",
+      "toGallery": "Ir al álbum",
+      "hide": "Ocultar",
+      "unhide": "Mostrar de nuevo",
+      "backupTitle": "Copia de seguridad",
+      "backupPhotos": "Descargar todas las fotos (zip)",
+      "backupVideos": "Descargar todos los videos (zip)",
+      "backupHint": "Cloudinary arma el zip, lo que puede tardar un minuto en un álbum grande.",
+      "backupDemo": "La copia de seguridad funciona cuando Cloudinary esté conectado y el modo de prueba apagado."
+    }
   },
   "Share": {
     "title": "Comparte tus fotos",
@@ -199,7 +250,7 @@
     "hello": "¡Hola, {name}!",
     "notYou": "¿No eres tú?",
     "pick": "Elegir fotos y videos",
-    "pickHint": "Elige todas las que quieras. Videos de hasta 60 segundos.",
+    "pickHint": "Elige todas las que quieras, fotos y videos.",
     "keepOpen": "Deja esta página abierta mientras se suben. Si pierdes la señal, terminarán solas cuando vuelva la conexión.",
     "offline": "Estás sin conexión. Tus fotos están guardadas en el teléfono y se subirán cuando vuelva la señal.",
     "progress": "{done} de {total} subidas",
@@ -213,11 +264,20 @@
       "done": "Subida"
     },
     "errors": {
-      "tooLong": "Más de 60 segundos",
-      "tooBig": "Demasiado grande (máx. 100 MB)",
+      "tooBig": "Más de 100 MB. Recórtalo e inténtalo de nuevo",
       "failed": "No se pudo subir"
     },
-    "galleryLink": "Ver la página de fotos"
+    "galleryLink": "Ver el álbum",
+    "keepOpenShort": "Mantén esta página abierta hasta que termine.",
+    "big": {
+      "title": "{count, plural, one {Este video es bastante grande} other {Estos videos son bastante grandes}}",
+      "body": "{count, plural, one {Los videos grandes pueden tardar con la señal del lugar. Puedes recortarlo a la mejor parte en tu app de Fotos antes, pero si prefieres enviarlo completo, adelante: no queremos perdernos nada.} other {Los videos grandes pueden tardar con la señal del lugar. Puedes recortarlos a las mejores partes en tu app de Fotos antes, o desmarcar los que prefieras omitir. ¡Pero nos encantaría recibirlos todos!}}",
+      "facts": "{size} MB",
+      "factsLength": "{size} MB · {length}",
+      "include": "Subir este video",
+      "upload": "{count, plural, =0 {Continuar} one {Subir de todos modos} other {Subir # videos}}",
+      "skip": "{count, plural, one {No subirlo} other {No subir ninguno}}"
+    }
   },
   "Footer": {
     "madeWith": "Hecho con amor por {first} y {second}"
