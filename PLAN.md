@@ -37,7 +37,7 @@ Decision (2026-11-08): RSVPs go to a Google Sheet instead of Supabase, so KAJ an
 - [x] RSVP form at `/rsvp`: name, email, attending yes/no, party size (1–8), optional note; spam honeypot; noindex
 - [x] Server action validates with zod, then posts to a Google Apps Script (`scripts/rsvp-apps-script.gs`) with a shared secret
 - [x] Apps Script appends a row to the "RSVPs" tab and emails the guest a confirmation in their language from KAJ's Gmail
-- [x] KAJ: create the sheet, paste the script, deploy, add `RSVP_SCRIPT_URL` + `RSVP_SECRET` to `.env.local` (Vercel still to do)
+- [x] KAJ: create the sheet, paste the script, deploy, add `RSVP_SCRIPT_URL` + `RSVP_SECRET` to `.env.local` and Vercel
 - [x] Designed confirmation email (2026-11-09): floral header, our photo, RSVP summary, "The day" schedule with map links, dress code, "Add to Google Calendar" button (shows once `date`/`startsAt` is set), roses footer. Images are attached to the email until `SITE_URL` is a live https address, then linked from `public/email/`
 - [ ] Later (optional): guest list import + personal links `/i/[slug]` pre-filling the form; registry editing without code
 Done when: a real RSVP from a phone shows in the sheet and the guest gets the email.
@@ -66,8 +66,8 @@ Decisions: photos auto-publish, an admin can hide any with one tap; hearts are s
 - [x] Heart button on each photo (localStorage per device), "My hearts" filter, "Download all hearted" as a zip (built in the browser)
 - [x] Admin `/gallery/admin` (`ADMIN_CODE`): one-tap hide/unhide, "download everything" backup zips from Cloudinary
 - [x] Upload page: big videos (over 40 MB or 60 s) get one "quite large, consider trimming" popup for the whole batch, upload anyway is the default; smallest files upload first; pinned "keep this page open" banner
-- [x] KAJ: add `GALLERY_CODE` and `ADMIN_CODE` to `.env.local` (Vercel still to do)
-- [ ] With Cloudinary connected: upload a few test photos/videos from a phone, check they show, hide one, try both backup zips
+- [x] KAJ: add `GALLERY_CODE` and `ADMIN_CODE` to `.env.local` and Vercel
+- [x] With Cloudinary connected: upload a few test photos/videos from a phone, check they show, hide one, try both backup zips
 - [ ] Before the day: set `date` and `startsAt`, then `gallery.demo: false`
 Done when: a guest with the code can heart 10 photos and download them as one zip.
 
