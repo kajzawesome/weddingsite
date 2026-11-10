@@ -232,15 +232,17 @@ body {
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-/* Personal invites: the guest's name, handwritten on the envelope below the seal. */
+/* Personal invites: the guest's name, handwritten just above the envelope
+   (kept off the envelope itself so the fold lines don't cut through it). */
 .envelope-to {
   position: absolute;
   z-index: 5;
-  left: 0;
-  right: 0;
-  bottom: 5%;
+  left: -10%;
+  right: -10%;
+  bottom: calc(100% + 1.25rem);
   text-align: center;
-  font-size: clamp(1.4rem, 6vw, 2.1rem);
+  line-height: 1.2;
+  font-size: clamp(1.8rem, 8vw, 2.6rem);
   color: var(--color-ink);
   transition: opacity 0.4s ease;
 }
