@@ -244,7 +244,8 @@
       "backupPhotos": "Baixar todas as fotos (zip)",
       "backupVideos": "Baixar todos os vídeos (zip)",
       "backupHint": "O Cloudinary monta o zip, o que pode levar um minuto num álbum grande.",
-      "backupDemo": "O backup funciona quando o Cloudinary estiver conectado e o modo de teste desligado."
+      "backupDemo": "O backup funciona quando o Cloudinary estiver conectado e o modo de teste desligado.",
+      "toInvites": "Enviar convites"
     }
   },
   "Share": {
@@ -295,5 +296,45 @@
     "text": "Este site também está em português.",
     "switch": "Mudar para português",
     "dismiss": "Não, obrigado"
+  },
+  "Invite": {
+    "to": "Para {name}",
+    "tap": "Toque para abrir",
+    "metaTitle": "Um convite para {name}",
+    "metaDescription": "{first} & {second} vão se casar, e adoraríamos que você estivesse lá.",
+    "email": {
+      "subject": "Você está convidado(a): casamento de {first} & {second}",
+      "preview": "Fizemos um convite especial só para você.",
+      "greeting": "Querido(a) {name},",
+      "body": "Vamos nos casar, e adoraríamos celebrar esse dia com você. Fizemos um convite especial só para você, com tudo o que você precisa saber.",
+      "button": "Abrir o seu convite",
+      "footnote": "Você pode confirmar presença pelo próprio convite. Dúvidas? É só responder a este e-mail."
+    },
+    "whatsapp": "Olá, {name}! Vamos nos casar e adoraríamos celebrar com você. Aqui está o seu convite: {link}",
+    "admin": {
+      "title": "Convites",
+      "intro": "Digite o código de administrador para enviar os convites.",
+      "summary": "{total, plural, one {# convite} other {# convites}} · {emailed} por e-mail · {opened} abertos",
+      "empty": "Ainda não há convidados. Adicione-os na aba Guests da planilha de RSVP (Wedding > Set up guest list) e depois atualize esta página.",
+      "error": "Não foi possível ler a lista de convidados. Verifique se o Apps Script mais recente está publicado e atualize a página.",
+      "help": "Os convidados ficam na aba Guests da planilha de RSVP. As mudanças aparecem aqui quando você atualiza a página.",
+      "email": "E-mail",
+      "emailAgain": "Enviar de novo",
+      "whatsapp": "WhatsApp",
+      "copy": "Copiar link",
+      "copied": "Copiado",
+      "sending": "Enviando…",
+      "failed": "Não foi enviado. Tente de novo.",
+      "emailed": "E-mail enviado {date}",
+      "whatsappSent": "WhatsApp {date}",
+      "opened": "Aberto {date}",
+      "notOpened": "Ainda não abriu",
+      "noEmail": "Sem e-mail na planilha",
+      "sendAll": "Enviar e-mail a todos que ainda não receberam ({count})",
+      "sendAllProgress": "Enviando {done} de {total}…",
+      "confirmAll": "Enviar o convite por e-mail para {count, plural, one {# convidado} other {# convidados}}?",
+      "confirmAgain": "Enviar o convite para {name} de novo?",
+      "today": "hoje"
+    }
   }
 }

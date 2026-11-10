@@ -232,6 +232,40 @@ body {
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
+/* Personal invites: the guest's name, handwritten on the envelope below the seal. */
+.envelope-to {
+  position: absolute;
+  z-index: 5;
+  left: 0;
+  right: 0;
+  bottom: 5%;
+  text-align: center;
+  font-size: clamp(1.4rem, 6vw, 2.1rem);
+  color: var(--color-ink);
+  transition: opacity 0.4s ease;
+}
+
+/* "Tap to open", gently breathing until the guest taps. */
+.envelope-hint {
+  animation: envelope-hint 2.4s ease-in-out infinite;
+  transition: opacity 0.3s ease;
+}
+
+@keyframes envelope-hint {
+  50% {
+    opacity: 0.45;
+  }
+}
+
+.envelope-intro:not([data-stage="closed"]) .envelope-to,
+.envelope-intro:not([data-stage="closed"]) .envelope-hint {
+  opacity: 0;
+}
+
+.envelope-intro[data-stage="closed"]:has(.envelope-hint) .envelope {
+  cursor: pointer;
+}
+
 .envelope-intro:not([data-stage="closed"]) .envelope-seal {
   opacity: 0;
   transform: scale(0.6);

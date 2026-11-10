@@ -244,7 +244,8 @@
       "backupPhotos": "Descargar todas las fotos (zip)",
       "backupVideos": "Descargar todos los videos (zip)",
       "backupHint": "Cloudinary arma el zip, lo que puede tardar un minuto en un álbum grande.",
-      "backupDemo": "La copia de seguridad funciona cuando Cloudinary esté conectado y el modo de prueba apagado."
+      "backupDemo": "La copia de seguridad funciona cuando Cloudinary esté conectado y el modo de prueba apagado.",
+      "toInvites": "Enviar invitaciones"
     }
   },
   "Share": {
@@ -295,5 +296,45 @@
     "text": "Este sitio también está en español.",
     "switch": "Cambiar a español",
     "dismiss": "No, gracias"
+  },
+  "Invite": {
+    "to": "Para {name}",
+    "tap": "Toca para abrir",
+    "metaTitle": "Una invitación para {name}",
+    "metaDescription": "{first} y {second} se casan, y nos encantaría que estuvieras allí.",
+    "email": {
+      "subject": "Estás invitado(a): la boda de {first} y {second}",
+      "preview": "Hicimos una invitación especial solo para ti.",
+      "greeting": "Querido(a) {name}:",
+      "body": "Nos vamos a casar, y nos encantaría celebrarlo contigo. Hicimos una invitación especial solo para ti, con todo lo que necesitas saber.",
+      "button": "Abrir tu invitación",
+      "footnote": "Puedes confirmar tu asistencia desde la misma invitación. ¿Preguntas? Solo responde a este correo."
+    },
+    "whatsapp": "¡Hola, {name}! Nos vamos a casar y nos encantaría celebrarlo contigo. Aquí está tu invitación: {link}",
+    "admin": {
+      "title": "Invitaciones",
+      "intro": "Escribe el código de administrador para enviar las invitaciones.",
+      "summary": "{total, plural, one {# invitación} other {# invitaciones}} · {emailed} por correo · {opened} abiertas",
+      "empty": "Todavía no hay invitados. Agrégalos en la pestaña Guests de la hoja de RSVP (Wedding > Set up guest list) y luego actualiza esta página.",
+      "error": "No se pudo leer la lista de invitados. Revisa que el Apps Script más reciente esté publicado y actualiza la página.",
+      "help": "Los invitados se gestionan en la pestaña Guests de la hoja de RSVP. Los cambios aparecen aquí al actualizar la página.",
+      "email": "Correo",
+      "emailAgain": "Enviar otra vez",
+      "whatsapp": "WhatsApp",
+      "copy": "Copiar enlace",
+      "copied": "Copiado",
+      "sending": "Enviando…",
+      "failed": "No se envió. Inténtalo de nuevo.",
+      "emailed": "Correo enviado {date}",
+      "whatsappSent": "WhatsApp {date}",
+      "opened": "Abierta {date}",
+      "notOpened": "Aún no la abre",
+      "noEmail": "Sin correo en la hoja",
+      "sendAll": "Enviar correo a todos los que faltan ({count})",
+      "sendAllProgress": "Enviando {done} de {total}…",
+      "confirmAll": "¿Enviar la invitación por correo a {count, plural, one {# invitado} other {# invitados}}?",
+      "confirmAgain": "¿Enviar la invitación a {name} otra vez?",
+      "today": "hoy"
+    }
   }
 }

@@ -71,18 +71,21 @@ Decisions: photos auto-publish, an admin can hide any with one tap; hearts are s
 - [ ] Before the day: set `date` and `startsAt`, then `gallery.demo: false`
 Done when: a guest with the code can heart 10 photos and download them as one zip.
 
-## Phase 5 — Envelope invite + sending (1 weekend)
+## Phase 5 — Envelope invite + sending (built 2026-11-09)
 Learn: animation, transactional email, Open Graph link previews.
-- [ ] `/i/[slug]`: envelope with "To Ana" / "Para Ana" in the guest's locale; tap to break the seal, card slides out, then the invite page. "Skip" button and reduced-motion version
-- [ ] Record `invite_opened_at` when opened
-- [ ] Open Graph image (`opengraph-image.tsx`) of the sealed envelope with your names, so WhatsApp and iMessage show a nice card
-- [ ] Email template (React Email) with an animated envelope GIF and "Open your invitation" button; send through Resend from your domain
-- [ ] Admin: per-guest "Send email" and "Send on WhatsApp" (opens `wa.me` with a pre-written message in their language); shows who opened
+Decisions: the guest list is a "Guests" tab in the RSVP sheet (no database); invite emails go from KAJ's Gmail through the Apps Script (no Resend needed).
+- [x] `/[locale]/i/[slug]`: envelope with "For Ana" / "Para Ana" in the guest's language; waits for a tap, then opens into the full invite. "Skip" button; skipped for reduced motion. Unknown links still get the invite
+- [x] "Opened" date written to the Guests tab (from the browser, so WhatsApp's preview robot doesn't count; admin phones don't count)
+- [x] Open Graph image: our photo + names card for every page; personal invites add "Para Ana"
+- [x] Invite email (same design as the RSVP email) with "Open your invitation" button, in the guest's language, sent from Gmail
+- [x] Admin `/invites` (ADMIN_CODE): per-guest Email / WhatsApp / Copy link, "email everyone not yet emailed", shows emailed / WhatsApp / opened
+- [ ] KAJ: paste the new Apps Script and deploy a New version (before sharing any personal link), then Wedding > Set up guest list and add guests
+- [ ] KAJ: add yourself as a guest, send yourself the email and a WhatsApp, open both on your phone
 Done when: you send yourself the email and a WhatsApp link, and both open the animation.
 
 ## Phase 6 — Launch (ongoing)
 - [x] Buy and connect the domain on Vercel
-- [ ] Set up Resend DNS (SPF/DKIM) so email lands in the inbox
+- [ ] (Only if Gmail's ~100 emails/day ever isn't enough) Resend + DNS (SPF/DKIM)
 - [ ] Friends test on iPhone + Android, in PT and ES
 - [ ] Check signal at the venue
 - [ ] Backup: a Google Photos album QR printed, just in case

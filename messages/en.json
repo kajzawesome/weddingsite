@@ -244,7 +244,8 @@
       "backupPhotos": "Download all photos (zip)",
       "backupVideos": "Download all videos (zip)",
       "backupHint": "Cloudinary builds the zip, which can take a minute for a big album.",
-      "backupDemo": "Backups work once Cloudinary is connected and test mode is off."
+      "backupDemo": "Backups work once Cloudinary is connected and test mode is off.",
+      "toInvites": "Send invitations"
     }
   },
   "Share": {
@@ -295,5 +296,45 @@
     "text": "This site is also available in English.",
     "switch": "Switch to English",
     "dismiss": "No thanks"
+  },
+  "Invite": {
+    "to": "For {name}",
+    "tap": "Tap to open",
+    "metaTitle": "An invitation for {name}",
+    "metaDescription": "{first} & {second} are getting married, and we'd love for you to be there.",
+    "email": {
+      "subject": "You're invited: {first} & {second}'s wedding",
+      "preview": "We made a little invitation just for you.",
+      "greeting": "Dear {name},",
+      "body": "We're getting married, and we would love for you to celebrate with us. We made a little invitation just for you, with everything you need to know.",
+      "button": "Open your invitation",
+      "footnote": "You can RSVP right from the invitation. Questions? Just reply to this email."
+    },
+    "whatsapp": "Hi {name}! We're getting married and we'd love for you to celebrate with us. Here's your invitation: {link}",
+    "admin": {
+      "title": "Invitations",
+      "intro": "Enter the admin code to send invitations.",
+      "summary": "{total, plural, one {# invitation} other {# invitations}} · {emailed} emailed · {opened} opened",
+      "empty": "No guests yet. Add them in the Guests tab of the RSVP sheet (Wedding > Set up guest list), then refresh this page.",
+      "error": "Couldn't read the guest list. Check that the newest Apps Script is deployed, then refresh.",
+      "help": "Guests are managed in the Guests tab of the RSVP sheet. Changes there show up here when you refresh.",
+      "email": "Email",
+      "emailAgain": "Email again",
+      "whatsapp": "WhatsApp",
+      "copy": "Copy link",
+      "copied": "Copied",
+      "sending": "Sending…",
+      "failed": "Didn't send. Try again.",
+      "emailed": "Emailed {date}",
+      "whatsappSent": "WhatsApp {date}",
+      "opened": "Opened {date}",
+      "notOpened": "Not opened yet",
+      "noEmail": "No email in the sheet",
+      "sendAll": "Email everyone not emailed yet ({count})",
+      "sendAllProgress": "Sending {done} of {total}…",
+      "confirmAll": "Send the invitation email to {count, plural, one {# guest} other {# guests}}?",
+      "confirmAgain": "Send the invitation to {name} again?",
+      "today": "today"
+    }
   }
 }

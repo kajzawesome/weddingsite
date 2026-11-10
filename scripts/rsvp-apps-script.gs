@@ -23,6 +23,11 @@
  * "Anyone" access is safe here: without the SECRET the script refuses the request,
  * and the SECRET only lives on our server, never in the browser.
  *
+ * Personal invites
+ *  Wedding > Set up guest list adds a "Guests" tab. One row per invite (a person or
+ *  a household); see "Guest list" further down for the columns. The website's
+ *  /invites page reads it and sends the emails through this script.
+ *
  * After the wedding: thank-you emails
  *  Reload the sheet and a "Wedding" menu appears at the top.
  *  1. Wedding > Set up thank-you note: adds a "Thank-you note" tab with a draft in
@@ -48,6 +53,7 @@ function doPost(e) {
   try {
     const data = JSON.parse(e.postData.contents);
     if (data.secret !== SECRET) return reply({ ok: false, error: "unauthorized" });
+    if (data.action) return reply(guestAction(data)); // invites (see "Guest list" below)
 
     // Lock so two RSVPs at the same moment don't overwrite each other's row.
     const lock = LockService.getScriptLock();
@@ -79,6 +85,115 @@ function doPost(e) {
   } catch (err) {
     return reply({ ok: false, error: String(err) });
   }
+}
+
+// ---------- Guest list (personal invites) ----------
+/*
+  The "Guests" tab: one row per invite (a person or a household).
+    Link ID      : the end of their personal link, e.g. ana-silva. Leave it
+                   blank and it's made from the name the first time the site
+                   reads the list. Don't change it once the invite is sent.
+    Name         : what the envelope says, e.g. "Ana" or "Ana & Pedro"
+    Email        : for the "Email" button (optional)
+    WhatsApp     : number with country code, e.g. +55 71 91234-5678 (optional)
+    Language     : en, pt or es
+    Emailed / WhatsApp sent / Opened : filled in by the website
+*/
+const GUESTS_SHEET = "Guests";
+const GUEST_HEADERS = ["Link ID", "Name", "Email", "WhatsApp", "Language", "Emailed", "WhatsApp sent", "Opened"];
+const G = { slug: 0, name: 1, email: 2, phone: 3, lang: 4, emailed: 5, whatsapp: 6, opened: 7 }; // 0 = column A
+
+function guestAction(data) {
+  const lock = LockService.getScriptLock();
+  lock.waitLock(10000);
+  try {
+    const sheet = getGuestSheet();
+    const rows = withSlugs(sheet);
+    const find = function (slug) {
+      for (let r = 1; r < rows.length; r++) if (rows[r][G.slug] === slug) return r;
+      return -1;
+    };
+
+    if (data.action === "guests") return { ok: true, guests: rows.slice(1).filter(function (row) { return row[G.name]; }).map(toGuest) };
+
+    const r = find(String(data.slug || ""));
+    if (data.action === "guest") return { ok: true, guest: r > 0 ? toGuest(rows[r]) : null };
+    if (r < 0) return { ok: false, error: "no such guest" };
+
+    // Write a date into one column (only the first time, for "opened").
+    const stamp = function (col, onlyOnce) {
+      if (onlyOnce && rows[r][col]) return;
+      sheet.getRange(r + 1, col + 1).setValue(new Date());
+    };
+    if (data.action === "opened") stamp(G.opened, true);
+    else if (data.action === "whatsapp") stamp(G.whatsapp, false);
+    else if (data.action === "sendInvite") {
+      const email = String(rows[r][G.email]).trim();
+      if (!email) return { ok: false, error: "no email" };
+      MailApp.sendEmail({
+        to: email,
+        subject: data.subject,
+        body: data.body,
+        htmlBody: data.html || undefined,
+        inlineImages: inlineImages(data.images),
+        name: FROM_NAME,
+      });
+      stamp(G.emailed, false);
+    } else return { ok: false, error: "unknown action" };
+    return { ok: true };
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+function getGuestSheet() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let sheet = ss.getSheetByName(GUESTS_SHEET);
+  if (!sheet) {
+    sheet = ss.insertSheet(GUESTS_SHEET);
+    sheet.appendRow(GUEST_HEADERS);
+    sheet.setFrozenRows(1);
+    sheet.getRange("D:D").setNumberFormat("@"); // keep "+55..." as text, not a number
+  }
+  return sheet;
+}
+
+// Reads the tab, filling in any missing Link IDs (unique, made from the name).
+function withSlugs(sheet) {
+  const rows = sheet.getDataRange().getDisplayValues();
+  const used = {};
+  rows.slice(1).forEach(function (row) { if (row[G.slug]) used[row[G.slug]] = true; });
+  for (let r = 1; r < rows.length; r++) {
+    if (rows[r][G.slug] || !rows[r][G.name]) continue;
+    const base = slugify(rows[r][G.name]) || "guest";
+    let slug = base;
+    for (let n = 2; used[slug]; n++) slug = base + "-" + n;
+    used[slug] = true;
+    rows[r][G.slug] = slug;
+    sheet.getRange(r + 1, G.slug + 1).setValue(slug);
+  }
+  return rows;
+}
+
+// "Ana & Pedro Simões" -> "ana-pedro-simoes"
+function slugify(text) {
+  return String(text)
+    .normalize("NFD").replace(/[̀-ͯ]/g, "")
+    .toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "")
+    .slice(0, 40);
+}
+
+function toGuest(row) {
+  return {
+    slug: row[G.slug],
+    name: row[G.name],
+    email: row[G.email],
+    phone: row[G.phone],
+    lang: String(row[G.lang] || "en").trim().toLowerCase(),
+    emailed: row[G.emailed],
+    whatsapp: row[G.whatsapp],
+    opened: row[G.opened],
+  };
 }
 
 // Before the site is online, the website sends the email's pictures as base64
@@ -123,10 +238,19 @@ function reply(obj) {
 function onOpen() {
   SpreadsheetApp.getUi()
     .createMenu("Wedding")
+    .addItem("Set up guest list", "setUpGuestList")
+    .addSeparator()
     .addItem("Set up thank-you note", "setUpThankYouNote")
     .addItem("Send a test to me", "sendThankYouTest")
     .addItem("Send thank-you emails", "sendThankYous")
     .addToUi();
+}
+
+// Creates the "Guests" tab (if needed) and fills in Link IDs for any new rows.
+function setUpGuestList() {
+  const sheet = getGuestSheet();
+  withSlugs(sheet);
+  SpreadsheetApp.getActiveSpreadsheet().setActiveSheet(sheet);
 }
 
 // A tab with one row per language: Language | Subject | Message. Edit freely.

@@ -28,9 +28,9 @@ Build steps: see `PLAN.md`. Rules for Claude Code: see `CLAUDE.md`.
 - [x] Guest photo/video upload via QR at `/share`: works on bad signal (queues and retries)
 - [x] Shared gallery at `/gallery`: opens when the wedding starts, 5-photo preview, hearts and zip download
 - [x] Admin at `/gallery/admin`: hide photos, download everything
-- [ ] Admin: send invites
-- [ ] Personal guest links with envelope-opening animation (`/i/[guest]`)
-- [ ] Invite email via Resend + WhatsApp send button + link preview image
+- [x] Personal invites at `/pt/i/ana-silva`: envelope says "Para Ana", tap to open, then the full invite. Opens are logged in the sheet
+- [x] Admin at `/invites`: send each invite by email (from Gmail) or WhatsApp, copy links, see who opened
+- [x] Link preview card (our photo and names) for WhatsApp and iMessage, with the guest's name on personal links
 
 ## Privacy
 - Guest code: needed for the full gallery only (5-photo preview without it)
@@ -47,6 +47,7 @@ Next.js 16, Tailwind CSS v4, next-intl, Framer Motion, Vercel, Cloudinary (photo
 
 ## One-time setup
 - **RSVP sheet:** follow the steps at the top of `scripts/rsvp-apps-script.gs`, then set `RSVP_SCRIPT_URL` and `RSVP_SECRET`. After pasting a newer copy of the script, always Deploy > Manage deployments > New version, or emails keep using the old one
+- **Guest list:** in the RSVP sheet, Wedding > Set up guest list. Fill in Name (what the envelope says, e.g. "Ana & Pedro"), Email and/or WhatsApp (with country code) and Language (en/pt/es). Link IDs fill in by themselves. Then send from `/invites` (sign in with the admin code)
 - **Email pictures:** small copies of the art and photo live in `public/email/`. Until `SITE_URL` is set to the live https address they're attached to each email; after that they're linked
 - **Photo uploads:** create a Cloudinary account, then set the three `CLOUDINARY` keys and `SHARE_CODE`
 - **QR code:** `node scripts/make-qr.mts <site-url> <code>` writes `print/share-qr.svg` and `.png`. The domain is final, so use `https://www.casamentojacobs.com`

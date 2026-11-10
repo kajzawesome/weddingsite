@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { locale as rootLocale } from "next/root-params";
 import { event } from "@/config/event";
 import { routing } from "@/i18n/routing";
@@ -21,9 +22,13 @@ export function generateStaticParams() {
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("Meta");
+  const title = t("title", event.couple);
   return {
-    title: t("title", event.couple),
+    // Link previews need full addresses (https://...), not just "/en/...".
+    metadataBase: new URL(process.env.SITE_URL || "http://localhost:3000"),
+    title,
     description: t("description"),
+    openGraph: { title, description: t("description"), type: "website" },
   };
 }
 
@@ -56,7 +61,9 @@ export default async function LocaleLayout({
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />
-          <LanguageSuggest />
+          <Suspense>
+            <LanguageSuggest />
+          </Suspense>
         </NextIntlClientProvider>
       </body>
     </html>

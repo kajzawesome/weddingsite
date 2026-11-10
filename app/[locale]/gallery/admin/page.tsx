@@ -48,6 +48,9 @@ async function AdminBody() {
         <Link href="/gallery" className={`${button} mt-5`}>
           {t("toGallery")}
         </Link>
+        <Link href="/invites" className={`${button} mt-3`}>
+          {t("toInvites")}
+        </Link>
       </div>
       <div className="glass rounded-[2rem] p-6">
         <h2 className="font-serif text-3xl">{t("backupTitle")}</h2>

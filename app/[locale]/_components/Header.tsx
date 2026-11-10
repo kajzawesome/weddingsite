@@ -1,7 +1,8 @@
 import { getTranslations } from "next-intl/server";
+import { Suspense } from "react";
 import { event } from "@/config/event";
 import { Link } from "@/i18n/navigation";
-import { LanguageSwitcher } from "./LanguageSwitcher";
+import { LanguageSwitcher, LanguageSwitcherShell } from "./LanguageSwitcher";
 
 export async function Header() {
   const t = await getTranslations("Nav");
@@ -21,7 +22,9 @@ export async function Header() {
           <Link href="/registry" className="hover:text-primary-dark">
             {t("registry")}
           </Link>
-          <LanguageSwitcher label={t("language")} />
+          <Suspense fallback={<LanguageSwitcherShell label={t("language")} />}>
+            <LanguageSwitcher label={t("language")} />
+          </Suspense>
         </nav>
       </div>
     </header>

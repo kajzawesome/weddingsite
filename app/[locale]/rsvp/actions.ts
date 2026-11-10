@@ -5,29 +5,11 @@ import { getFormatter, getTranslations } from "next-intl/server";
 import { z } from "zod";
 import { event } from "@/config/event";
 import { routing } from "@/i18n/routing";
-import { readFile } from "node:fs/promises";
-import path from "node:path";
 import { googleCalendarUrl } from "@/lib/calendar";
-import { localize } from "@/lib/localized";
+import { emailImages } from "@/lib/emailImages";
 import { renderEmail } from "@/lib/emailTemplate";
-
-// Small copies of our art and photo, made for email (in public/email).
-const EMAIL_IMAGES = { garland: "garland.png", couple: "couple.jpg", roses: "roses.png" };
-
-// The images as base64 text, so the Apps Script can attach them to the email.
-async function emailImages() {
-  try {
-    const entries = await Promise.all(
-      Object.entries(EMAIL_IMAGES).map(async ([name, file]) => {
-        const data = await readFile(path.join(process.cwd(), "public", "email", file));
-        return [name, { data: data.toString("base64"), type: file.endsWith(".png") ? "image/png" : "image/jpeg" }];
-      }),
-    );
-    return Object.fromEntries(entries) as Record<string, { data: string; type: string }>;
-  } catch {
-    return undefined; // no pictures is better than no email
-  }
-}
+import { localize } from "@/lib/localized";
+import { callSheet } from "@/lib/sheet";
 
 // What the form sends back to the page after submitting.
 export type RsvpState =
@@ -80,13 +62,6 @@ export async function submitRsvp(_prev: RsvpState, formData: FormData): Promise<
     };
   }
 
-  const url = process.env.RSVP_SCRIPT_URL;
-  const secret = process.env.RSVP_SECRET;
-  if (!url || !secret) {
-    console.error("RSVP_SCRIPT_URL / RSVP_SECRET missing in .env.local");
-    return { status: "error", message: t("errors.server") };
-  }
-
   const { name, email, guests, message } = parsed.data;
   const firstName = name.split(" ")[0];
   const count = attending ? guests : 0;
@@ -110,13 +85,7 @@ export async function submitRsvp(_prev: RsvpState, formData: FormData): Promise<
   const format = await getFormatter({ locale });
   const site = process.env.SITE_URL?.replace(/\/$/, "");
   const online = site?.startsWith("https://");
-
-  // Email apps can't load pictures from localhost. Once the site is online the
-  // email links to them; before that, they travel inside the email as
-  // attachments, which the HTML points to with "cid:name".
-  const images = online ? undefined : await emailImages();
-  const img = (name: keyof typeof EMAIL_IMAGES) =>
-    online ? `${site}/email/${EMAIL_IMAGES[name]}` : images ? `cid:${name}` : undefined;
+  const { src: img, attachments: images } = await emailImages();
   const photo = img("couple");
 
   const parts = [
@@ -180,28 +149,19 @@ export async function submitRsvp(_prev: RsvpState, formData: FormData): Promise<
   });
 
   try {
-    const res = await fetch(url, {
-      method: "POST",
-      // Apps Script reads the raw body; text/plain avoids an extra CORS-style preflight.
-      headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body: JSON.stringify({
-        secret,
-        name,
-        email,
-        attending: attending ? "Yes" : "No",
-        guests: count,
-        message: message ?? "",
-        locale,
-        subject,
-        html,
-        images,
-        body,
-      }),
-      cache: "no-store",
+    const result = await callSheet({
+      name,
+      email,
+      attending: attending ? "Yes" : "No",
+      guests: count,
+      message: message ?? "",
+      locale,
+      subject,
+      html,
+      images,
+      body,
     });
-    const result = (await res.json().catch(() => null)) as { ok?: boolean; error?: string } | null;
-    // "unauthorized" = RSVP_SECRET doesn't match SECRET in the script
-    if (!res.ok || !result?.ok) throw new Error(`Apps Script replied ${res.status}: ${result?.error ?? "not JSON"}`);
+    if (!result.ok) throw new Error(`Apps Script said: ${result.error}`);
   } catch (err) {
     console.error("RSVP save failed", err);
     return { status: "error", message: t("errors.server") };
